@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class CircleManager : MonoBehaviour
 {
-    public CircleControl[] circles;
-    private static int currentCircle = 0;
+    private CircleControl[] circles;
+    private static int circleIndex = 0;
     public static CircleManager instance;
-    // Start is called before the first frame update
+
     private void Awake()
     {
         instance = this;
@@ -22,31 +22,28 @@ public class CircleManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-
     public void nextCircle()
     {
         StartCoroutine(NextCircleCoroutine());
     }
     public IEnumerator NextCircleCoroutine()
     {
-
         yield return new WaitForSeconds(0);
 
-        currentCircle = currentCircle + 1;
-        if (currentCircle >= circles.Length)
+        circleIndex = circleIndex + 1;
+        if (circleIndex >= circles.Length)
         {
-            currentCircle = 0;
+            circleIndex = 0;
         }
     }
 
     public bool IsMyTurn(int i)
     {
-        return i == currentCircle;
+        return i == circleIndex;
     }
-    public int getCurrentCircle()
+    public CircleControl getCurrentCircle()
     {
-        return currentCircle;
+        return circles[circleIndex];
     }
 }
 
