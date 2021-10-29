@@ -6,18 +6,28 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField]
     private Rigidbody2D rd;
-    public float power = 100f;
+    public float power;
 
     void Start()
     {
+        print(this);
         rd = GetComponent<Rigidbody2D>();
-        print(transform.up);
+        // print(power);
         rd.velocity = transform.up * power;
-        Destroy(gameObject, 5);
+        Destroy(gameObject, 15);
+    }
+
+    public void Fire(float _power, GameObject attackPos) {
+        Projectile instance = this;
+        // print("Fire");
+        instance.power = _power;
+        Instantiate(instance, attackPos.transform.position, attackPos.transform.rotation);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        print(collision.gameObject.tag);
+        if (collision.tag == "Stage") {
+            Destroy(gameObject);
+        }
     }
 }
