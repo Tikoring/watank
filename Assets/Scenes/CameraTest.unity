@@ -271,7 +271,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 358a1f92c8dfc2748bb0aa094e8c0b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraHold: 1
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -359,7 +358,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deb9f8c2d35a8aa4a8f7519ffbd93f9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  circles: []
 --- !u!212 &1545095390
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -434,7 +432,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2141500205460035657, guid: fc466adbe76c0cd4799a0fc11d7b0dad, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2141500205460035657, guid: fc466adbe76c0cd4799a0fc11d7b0dad, type: 3}
       propertyPath: m_LocalPosition.x
@@ -517,6 +515,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2141500205460035657, guid: fc466adbe76c0cd4799a0fc11d7b0dad, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7805788528549552701, guid: fc466adbe76c0cd4799a0fc11d7b0dad, type: 3}
       propertyPath: m_Name
       value: Circle
