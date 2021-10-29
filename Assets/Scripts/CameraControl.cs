@@ -23,7 +23,7 @@ public class CameraControl : MonoBehaviour
             IsHold = !IsHold;
         }
 
-        if(IsHold == true)
+        if (IsHold == true)
         {
             FocusCameara();
         }
@@ -58,8 +58,9 @@ public class CameraControl : MonoBehaviour
 
     void FocusCameara()
     {
-        targetPos.Set(CircleManager.instance.getCurrentCircle().transform.position.x, 
+        targetPos.Set(CircleManager.instance.getCurrentCircle().transform.position.x,
             CircleManager.instance.getCurrentCircle().transform.position.y, this.transform.position.z);
         this.transform.position = Vector3.Lerp(this.transform.position, targetPos, cameraSpeed * Time.deltaTime);
     }
+}
 

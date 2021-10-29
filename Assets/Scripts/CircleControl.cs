@@ -21,7 +21,6 @@ public class CircleControl : MonoBehaviour
         Move();
         if (Input.GetKeyUp("q"))
         {
-            CameraControl.cam.setIsHold(true);
             CircleManager.instance.nextCircle();
         }
     }
