@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6977006319575623109}
   - component: {fileID: 6977006319575623110}
   - component: {fileID: 6977006319575623108}
+  - component: {fileID: 5696453840021283037}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Untagged
@@ -93,6 +94,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 511792744e2e4984f8b7b4e950663fe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5696453840021283037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6977006319575623113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7be106d48e41dd84ebaae5149ecca871, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  circleId: 0
 --- !u!1 &6977006319801692169
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,7 +178,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 0.3679245, g: 0.16822186, b: 0, a: 1}
   m_FlipX: 0
@@ -294,7 +308,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 1}
   m_FlipX: 0
