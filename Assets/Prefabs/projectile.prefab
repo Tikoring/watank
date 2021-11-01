@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rd: {fileID: 0}
+  pos: {fileID: 6977006319575623113, guid: 6515006e9a1450b4ea43efe3f938cdbe, type: 3}
   power: 13.2102165
 --- !u!58 &3847451789840437725
 CircleCollider2D:

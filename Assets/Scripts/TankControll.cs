@@ -27,20 +27,20 @@ public class TankControll : MonoBehaviour
 
         if (hit) {
             angle = Vector2.Angle (hit.normal, Vector2.up);
-            transform.eulerAngles = new Vector3 (0, 0, angle);  //현재 지면의 각도와 tank의 기본각도를 맞춤
+            transform.eulerAngles = new Vector3 (0, transform.eulerAngles.y, angle);  //현재 지면의 각도와 tank의 기본각도를 맞춤
         }
     }
 
     
     private void Update () {
         if (Input.GetKey (KeyCode.LeftArrow)) {
-            if (transform.localScale.x != -1) {transform.localScale = l;}
+            if (transform.rotation.y != 180) {transform.eulerAngles = new Vector3 (0,180, transform.rotation.z);}
             move2D.Dir = Vector3.left;
             move2D.MoveX ();
         }
 
         if (Input.GetKey (KeyCode.RightArrow)) {
-            if (transform.localScale.x != 1) {transform.localScale = r;}
+            if (transform.rotation.y != 180) {transform.eulerAngles = new Vector3 (0, 0, transform.rotation.z);}
             move2D.Dir = Vector3.right;
             move2D.MoveX ();
         }

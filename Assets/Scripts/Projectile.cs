@@ -13,7 +13,7 @@ public class Projectile : MonoBehaviour
         print(this);
         rd = GetComponent<Rigidbody2D>();
         // print(power);
-        rd.velocity = transform.up * power;
+        rd.velocity = transform.right * power;
         Destroy(gameObject, 15);
     }
 
