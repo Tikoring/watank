@@ -25,7 +25,6 @@ public class Attack : MonoBehaviour
 
     void Update()
     {
-        
         CheckInput();
         UpdatePowerText();
     }
@@ -73,11 +72,9 @@ public class Attack : MonoBehaviour
                 projectilePrefab.Fire(power, attackPos);
                 cam.FocusBullet = true;
             }
-
             reverseCharging = false;
             charging = false;
             power = 0f;
-            //cam.FocusBullet = false;
         }
     }
 }

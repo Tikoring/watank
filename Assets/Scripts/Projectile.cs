@@ -23,7 +23,6 @@ public class Projectile : MonoBehaviour
         // print("Fire");
         instance.power = _power;
         bullet = Instantiate(instance, attackPos.transform.position, attackPos.transform.rotation);
-
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -32,6 +31,4 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    
 }
