@@ -11,25 +11,29 @@ public class Attack : MonoBehaviour
     private GameObject attackPos;   // 투사체 시작 위치
     [SerializeField]
     private Text powerText;     // Power text
-
+    private bool firePermission;
     private bool charging;
     private bool reverseCharging;
     private float power;
 
     void Start() {
         charging = false;
-        power = 0f;
+        power = 4f;
+        firePermission = projectilePrefab.FirePermission;
     }
 
     void Update()
     {
-        CheckInput();
+        if (firePermission) {
+            CheckInput();
+        }
         UpdatePowerText();
+        firePermission = projectilePrefab.FirePermission;   //포탄이 파괴 됐을 때 값의 변경을 위해 Update에서 계속 초기화
     }
 
     private void UpdatePowerText()
     {
-        powerText.text = power.ToString();
+        powerText.text = "Power : " + power.ToString();
     }
     private void CheckInput()
     {
@@ -58,7 +62,7 @@ public class Attack : MonoBehaviour
             reverseCharging = true;
         }
         // temporary 0 min
-        if (power < 0)
+        if (power < 4)
         {
             reverseCharging = false;
         }
@@ -67,11 +71,12 @@ public class Attack : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space))
         {
             if (charging) {
-                projectilePrefab.Fire(power, attackPos);
+                projectilePrefab.Fire(power * 2.5f, attackPos);
             }
+            firePermission = projectilePrefab.FirePermission;
             reverseCharging = false;
             charging = false;
-            power = 0f;
+            power = 4f;
         }
     }
 }
