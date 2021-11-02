@@ -14,6 +14,7 @@ public class CircleControl : MonoBehaviour
     }
 
     // Update is called once per frame
+    /*
     void Update()
     {
         if (!IsTurn)
@@ -36,4 +37,5 @@ public class CircleControl : MonoBehaviour
             transform.position = new Vector3(transform.position.x + 3.0f * Time.deltaTime, transform.position.y);
         }
     }
+    */
 }

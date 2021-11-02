@@ -7,8 +7,10 @@ public class Projectile : MonoBehaviour
     [SerializeField]
     private Rigidbody2D rd;
     public float power;
+    public static Projectile bullet;
     private static bool firePermission = true;
     public bool FirePermission => firePermission;   //포탄이 발사된 동안 공격을 막기 위함
+    
     void Start()
     {
         print(this);

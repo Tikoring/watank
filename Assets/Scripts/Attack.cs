@@ -15,9 +15,11 @@ public class Attack : MonoBehaviour
     private bool charging;
     private bool reverseCharging;
     private float power;
+    CameraControl cam;
 
     void Start() {
         charging = false;
+        cam = GameObject.FindObjectOfType<CameraControl>();
         power = 4f;
         firePermission = projectilePrefab.FirePermission;
     }
@@ -71,6 +73,7 @@ public class Attack : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space))
         {
             if (charging) {
+                cam.FocusBullet = true;
                 projectilePrefab.Fire(power * 2.5f, attackPos);
             }
             firePermission = projectilePrefab.FirePermission;
