@@ -4,6 +4,7 @@ using UnityEngine;
 //2d 횡 움직임을 position으로 구현 
 public class TankMove2D : MonoBehaviour
 {
+    [SerializeField]
     private float speed;
     private Vector3 dir = Vector3.zero;
     public float Speed {
