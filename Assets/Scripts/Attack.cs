@@ -15,11 +15,12 @@ public class Attack : MonoBehaviour
     private bool charging;
     private bool reverseCharging;
     private float power;
-
+    CameraControl cam;
     void Start() {
         charging = false;
         power = 4f;
         firePermission = projectilePrefab.FirePermission;
+        cam = GameObject.FindObjectOfType<CameraControl>();
     }
 
     void Update()
@@ -29,6 +30,9 @@ public class Attack : MonoBehaviour
         }
         UpdatePowerText();
         firePermission = projectilePrefab.FirePermission;   //포탄이 파괴 됐을 때 값의 변경을 위해 Update에서 계속 초기화
+        if (Projectile.bullet == null)
+            cam.FocusBullet = false;
+
     }
 
     private void UpdatePowerText()
@@ -72,6 +76,7 @@ public class Attack : MonoBehaviour
         {
             if (charging) {
                 projectilePrefab.Fire(power * 2.5f, attackPos);
+                cam.FocusBullet = true;
             }
             firePermission = projectilePrefab.FirePermission;
             reverseCharging = false;

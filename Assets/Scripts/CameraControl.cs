@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
-    private float cameraSpeed = 2.0f;
+    private static float cameraSpeed = 5.0f;
     private bool IsHold = true;
     private Vector3 targetPos;
+    public bool FocusBullet = false;
+    GameObject tank;
     // Start is called before the first frame update
     void Start()
     {
+        tank = GameObject.Find("Tank");
+
     }
 
     // Update is called once per frame
@@ -18,14 +22,22 @@ public class CameraControl : MonoBehaviour
         //turn�� �Ѿ�� �ڵ����� focus �ǵ��� ����
         //bullet�� �߰��Ǹ� bullet �߻��� �� focus�� bullet���� ������ ����
 
+        Debug.Log(FocusBullet);
+
         if (Input.GetKeyUp("y"))
         {
             IsHold = !IsHold;
         }
 
-        if (IsHold == true)
+        if (FocusBullet == true && Projectile.bullet != null)
         {
-            FocusCameara();
+            targetPos.Set(Projectile.bullet.transform.position.x, Projectile.bullet.transform.position.y, this.transform.position.z);
+            FocusCamera(targetPos);
+        }
+        else if (IsHold == true)
+        {
+            targetPos.Set(tank.transform.position.x, tank.transform.position.y, this.transform.position.z);
+            FocusCamera(targetPos);
         }
         else
         {
@@ -53,14 +65,17 @@ public class CameraControl : MonoBehaviour
         {
             targetPos += new Vector3(0.1f, 0, 0);
         }
-        this.transform.position = Vector3.Lerp(this.transform.position, targetPos, cameraSpeed * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, targetPos, cameraSpeed * Time.deltaTime);
     }
 
-    void FocusCameara()
+    public void FocusCamera(Vector3 pos)
     {
-        targetPos.Set(CircleManager.instance.getCurrentCircle().transform.position.x,
-            CircleManager.instance.getCurrentCircle().transform.position.y, this.transform.position.z);
-        this.transform.position = Vector3.Lerp(this.transform.position, targetPos, cameraSpeed * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, pos, cameraSpeed * Time.deltaTime);
+    }
+
+    public Vector3 GetCamPos()
+    {
+        Vector3 temp = transform.position;
+        return temp;
     }
 }
-

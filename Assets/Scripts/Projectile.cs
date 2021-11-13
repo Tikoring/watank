@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
     private Rigidbody2D rd;
     public float power;
     private static bool firePermission = true;
+    public static Projectile bullet;
     public bool FirePermission => firePermission;   //포탄이 발사된 동안 공격을 막기 위함
     void Start()
     {
@@ -25,7 +26,7 @@ public class Projectile : MonoBehaviour
         instance.power = _power;
         Vector3 pos = attackPos.transform.rotation * Vector3.right;
         //firePermission = false;
-        Instantiate(instance, attackPos.transform.position + pos, attackPos.transform.rotation);
+        bullet = Instantiate(instance, attackPos.transform.position + pos, attackPos.transform.rotation);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
