@@ -15,8 +15,8 @@ public class CameraControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //turnÀÌ ³Ñ¾î°¡¸é ÀÚµ¿À¸·Î focus µÇµµ·Ï ¼öÁ¤
-        //bulletÀÌ Ãß°¡µÇ¸é bullet ¹ß»çÇÒ ¶§ focus°¡ bulletÀ¸·Î °¡µµ·Ï ¼öÁ¤
+        //turnï¿½ï¿½ ï¿½Ñ¾î°¡ï¿½ï¿½ ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ focus ï¿½Çµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        //bulletï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ç¸ï¿½ bullet ï¿½ß»ï¿½ï¿½ï¿½ ï¿½ï¿½ focusï¿½ï¿½ bulletï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
         if (Input.GetKeyUp("y"))
         {
@@ -35,7 +35,7 @@ public class CameraControl : MonoBehaviour
 
     void FreeCamera()
     {
-        // map size °áÁ¤ ÀÌÈÄ map ¹ÛÀ¸·Î ¾È ³ª°¡°Ô ¼öÁ¤
+        // map size ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ map ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
         if (Input.GetKey("w"))
         {
