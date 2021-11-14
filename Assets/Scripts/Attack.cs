@@ -16,6 +16,7 @@ public class Attack : MonoBehaviour
     private bool reverseCharging;
     private float power;
     CameraControl cam;
+    public AudioClip attackClip;
     void Start() {
         charging = false;
         power = 4f;
@@ -77,6 +78,7 @@ public class Attack : MonoBehaviour
             if (charging) {
                 projectilePrefab.Fire(power * 2.5f, attackPos);
                 cam.FocusBullet = true;
+                Audio.instance.PlaySound("Attack", attackClip);
             }
             firePermission = projectilePrefab.FirePermission;
             reverseCharging = false;

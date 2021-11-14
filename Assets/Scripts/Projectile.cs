@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
     public float power;
     private static bool firePermission = true;
     public static Projectile bullet;
+    public AudioClip explosionClip;
     public bool FirePermission => firePermission;   //포탄이 발사된 동안 공격을 막기 위함
     void Start()
     {
@@ -33,9 +34,11 @@ public class Projectile : MonoBehaviour
     {
         if (collision.tag == "Stage") {
             Destroy(gameObject);
+            Audio.instance.PlaySound("Explosion", explosionClip);
         }
         if (collision.tag == "OtherPlayer") {  //상대방을 인식
             collision.GetComponent<PlayerHP> ().TakeDamage (10);
+            Audio.instance.PlaySound("Explosion", explosionClip);
             Destroy (gameObject);
         }
     }

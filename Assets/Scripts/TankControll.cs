@@ -11,6 +11,7 @@ public class TankControll : MonoBehaviour
     private Vector3 r = new Vector3 (1.0f, 1.0f, 1.0f);
     private float angle;
     private RaycastHit2D hit;
+    public AudioClip moveClip;
 
     public void Start()
     {
@@ -37,12 +38,16 @@ public class TankControll : MonoBehaviour
             if (transform.rotation.y != 180) {transform.eulerAngles = new Vector3 (0,180, transform.rotation.z);}
             move2D.Dir = Vector3.left;
             move2D.MoveX ();
+            if(Audio.go == null)
+                Audio.instance.PlaySound("Move", moveClip);
         }
 
         if (Input.GetKey (KeyCode.RightArrow)) {
             if (transform.rotation.y != 180) {transform.eulerAngles = new Vector3 (0, 0, transform.rotation.z);}
             move2D.Dir = Vector3.right;
             move2D.MoveX ();
+            if (Audio.go == null)
+                Audio.instance.PlaySound("Move", moveClip);
         }
 
         if (Input.GetKey (KeyCode.UpArrow)) {
