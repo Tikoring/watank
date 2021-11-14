@@ -17,9 +17,10 @@ GameObject:
   - component: {fileID: 5696453840021283037}
   - component: {fileID: -708745250956426045}
   - component: {fileID: 7910386276734658130}
+  - component: {fileID: 8376299383118278134}
   - component: {fileID: 2294426509464222538}
   m_Layer: 0
-  m_Name: Tank 1
+  m_Name: AssetTank
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,7 +81,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -125,6 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03de7d553900c78408d6bcdd372699f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
 --- !u!114 &6977006319575623110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,9 +190,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d519e14de65b045a589159efce2199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 733092651676218680, guid: b5a6a0faa6effad418809ecdc3ef7474, type: 3}
+  projectilePrefab: {fileID: 7182662119249690736, guid: 56e697895e30900469099470f6221f4a, type: 3}
   attackPos: {fileID: 6977006319992121092}
   powerText: {fileID: 0}
+--- !u!114 &8376299383118278134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6977006319575623113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e708eec4b73e6e440901ae375afd8377, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveEffect: {fileID: 8843775963072986732, guid: 683c032a87b67244a99d178b0046afb1, type: 3}
 --- !u!68 &2294426509464222538
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -207,13 +222,13 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: 0.20117018, y: 0.07659843}
-  - {x: 0.3036203, y: 0.07690856}
-  - {x: 0.3036203, y: 0.07690856}
-  - {x: 0.30432248, y: 0.15151027}
-  - {x: 0.15940683, y: 0.15300746}
-  - {x: 0.14327124, y: 0.19872724}
-  - {x: 0.002125904, y: 0.19964918}
+  - {x: 0.20349018, y: 0.0734105}
+  - {x: 0.20381458, y: 0.09447983}
+  - {x: 0.20413244, y: 0.107870236}
+  - {x: 0.2042465, y: 0.12764601}
+  - {x: 0.17172384, y: 0.15685654}
+  - {x: 0.1301844, y: 0.20103669}
+  - {x: -0.0001835376, y: 0.2011888}
   - {x: 0.00009704754, y: 0.23538329}
   - {x: -0.1989957, y: 0.23482843}
   - {x: -0.2800908, y: 0.19917965}
@@ -222,13 +237,13 @@ EdgeCollider2D:
   - {x: -0.26810816, y: 0.028175972}
   - {x: -0.38320172, y: -0.091214}
   - {x: -0.38296485, y: -0.19471465}
-  - {x: -0.27416974, y: -0.22943056}
-  - {x: 0.27624288, y: -0.22940837}
+  - {x: -0.27522707, y: -0.22414392}
+  - {x: 0.28258687, y: -0.22412173}
   - {x: 0.39241105, y: -0.19800411}
   - {x: 0.3918452, y: -0.090239316}
   - {x: 0.26962978, y: 0.03320553}
   - {x: 0.2012351, y: 0.034084745}
-  - {x: 0.20148796, y: 0.07726156}
+  - {x: 0.20352334, y: 0.074182294}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -330,8 +345,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0017329096, y: -0.06643178}
-  m_Size: {x: 0.46502087, y: 0.13713792}
+  m_Offset: {x: 0.0017329028, y: -0.06487686}
+  m_Size: {x: 0.46502092, y: 0.13402815}
   m_Direction: 1
 --- !u!95 &3432076459247702241
 Animator:
@@ -409,8 +424,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6977006320205941725}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.15, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.17, y: 0, z: 0}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_Children: []
   m_Father: {fileID: 6977006319992121091}
   m_RootOrder: 0

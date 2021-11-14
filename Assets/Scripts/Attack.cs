@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Attack : MonoBehaviour
 {
     [SerializeField]
-    private Projectile projectilePrefab;    // 투사체 프리팹 
+    private AssetProjectile projectilePrefab;    // 투사체 프리팹 
     [SerializeField]
     private GameObject attackPos;   // 투사체 시작 위치
     [SerializeField]
@@ -74,7 +74,7 @@ public class Attack : MonoBehaviour
         {
             if (charging) {
                 cam.FocusBullet = true;
-                projectilePrefab.Fire(power * 2.5f, attackPos);
+                projectilePrefab.Fire(power * 1.5f, attackPos);
             }
             firePermission = projectilePrefab.FirePermission;
             reverseCharging = false;
