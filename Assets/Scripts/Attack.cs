@@ -15,6 +15,12 @@ public class Attack : MonoBehaviour
     private bool charging;
     private bool reverseCharging;
     private float power;
+    private bool twice;
+    public bool Twice {
+        get {return twice;}
+        set {twice = value;}
+    }
+    public AssetProjectile ProjectilePrefab => projectilePrefab;
     CameraControl cam;
 
     void Start() {
@@ -22,6 +28,7 @@ public class Attack : MonoBehaviour
         cam = GameObject.FindObjectOfType<CameraControl>();
         power = 4f;
         firePermission = projectilePrefab.FirePermission;
+        twice = false;
     }
 
     void Update()
@@ -72,14 +79,28 @@ public class Attack : MonoBehaviour
         // 키를 뗄 때 Fire, charging, reverseCharging, power 초기화
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            if (charging) {
+            if (charging && !twice) {
                 cam.FocusBullet = true;
+                charging = false;
+                reverseCharging = false;
                 projectilePrefab.Fire(power * 1.5f, attackPos);
+                firePermission = projectilePrefab.FirePermission;
+                power = 4f;
+            } 
+            if (charging && twice) {
+                StartCoroutine ("AttackTwice");     //skill 사용을 위한 coroutine
+                twice = false;
             }
-            firePermission = projectilePrefab.FirePermission;
-            reverseCharging = false;
-            charging = false;
-            power = 4f;
         }
+    }
+    private IEnumerator AttackTwice () {
+        cam.FocusBullet = true;
+        charging = false;
+        reverseCharging = false;
+        projectilePrefab.Fire(power * 1.5f, attackPos);
+        yield return new WaitForSeconds (2.5f);
+        projectilePrefab.Fire(power * 1.5f, attackPos);
+        firePermission = projectilePrefab.FirePermission;
+        power = 4f;
     }
 }

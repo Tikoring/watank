@@ -120,8 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rd: {fileID: 0}
-  destroyTime: 0
-  power: 8.812132
+  power: 6.9715023
 --- !u!95 &-998874639964103935
 Animator:
   serializedVersion: 3
