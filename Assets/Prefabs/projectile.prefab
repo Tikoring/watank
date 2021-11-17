@@ -120,6 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rd: {fileID: 0}
   power: 49.20153
+  explosionClip: {fileID: 8300000, guid: fd706038486fee041947a774223dc22e, type: 3}
 --- !u!58 &3847451789840437725
 CircleCollider2D:
   m_ObjectHideFlags: 0

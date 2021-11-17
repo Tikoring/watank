@@ -13,7 +13,8 @@ public class AssetProjectile : MonoBehaviour
     private bool coll;
     private Animator apAnimator;                    //projectile animator 제어
     public bool FirePermission => firePermission;   //포탄이 발사된 동안 공격을 막기 위함
-    
+    public AudioClip explosionClip;
+
     void Start()
     {
         print(this);
@@ -32,7 +33,7 @@ public class AssetProjectile : MonoBehaviour
         // print("Fire");
         instance.power = _power;
         Vector3 pos = attackPos.transform.rotation * Vector3.right / 3;
-        Instantiate(instance, attackPos.transform.position + pos, attackPos.transform.rotation);
+        bullet = Instantiate(instance, attackPos.transform.position + pos, attackPos.transform.rotation);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -40,8 +41,10 @@ public class AssetProjectile : MonoBehaviour
         if (collision.tag == "Field") {
             coll = true;
             apAnimator.SetBool ("Explosion", true);
+
             rd.gravityScale = 0;
             rd.velocity = Vector2.zero;
+            Audio.instance.PlaySound("Explosion", explosionClip);
             Destroy(gameObject, 0.67f);         //개선 필요함(animation이 종료될 시에 삭제되게)
         }
         if (collision.tag == "OtherPlayer") {   //상대방을 인식
@@ -50,6 +53,7 @@ public class AssetProjectile : MonoBehaviour
             collision.GetComponent<PlayerHP> ().TakeDamage (10);
             rd.gravityScale = 0;
             rd.velocity = Vector2.zero;
+            Audio.instance.PlaySound("Explosion", explosionClip);
             Destroy(gameObject, 0.67f);
         }
     }

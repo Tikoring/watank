@@ -4,39 +4,44 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
+    public static Camera MainCamera;
     private static float cameraSpeed = 5.0f;
     private bool IsHold = true;
     private Vector3 targetPos;
+    private float distance = 0;
     public bool FocusBullet = false;
     GameObject tank;
     // Start is called before the first frame update
     void Start()
     {
+        MainCamera = GetComponent<Camera>();
+        //when camera is focus mode, camera follow tank
         tank = GameObject.Find("AssetTank");
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        //turn�� �Ѿ�� �ڵ����� focus �ǵ��� ����
-        //bullet�� �߰��Ǹ� bullet �߻��� �� focus�� bullet���� ������ ����
-
+        Zoom();
+ 
         if (Input.GetKeyUp("y"))
         {
             IsHold = !IsHold;
         }
 
-        if (FocusBullet == true && Projectile.bullet != null)
+        //follow bullet
+        if (FocusBullet == true && AssetProjectile.bullet != null)
         {
-            targetPos.Set(Projectile.bullet.transform.position.x, Projectile.bullet.transform.position.y, this.transform.position.z);
+            targetPos.Set(AssetProjectile.bullet.transform.position.x, AssetProjectile.bullet.transform.position.y, this.transform.position.z + distance);
             FocusCamera(targetPos);
         }
+        //follow tank
         else if (IsHold == true)
         {
             targetPos.Set(tank.transform.position.x, tank.transform.position.y, this.transform.position.z);
             FocusCamera(targetPos);
         }
+        //free cam
         else
         {
             FreeCamera();
@@ -45,8 +50,7 @@ public class CameraControl : MonoBehaviour
 
     void FreeCamera()
     {
-        // map size ���� ���� map ������ �� ������ ����
-
+        //자유시점
         if (Input.GetKey("w"))
         {
             targetPos += new Vector3(0, 0.1f, 0);
@@ -63,18 +67,23 @@ public class CameraControl : MonoBehaviour
         {
             targetPos += new Vector3(0.1f, 0, 0);
         }
-        transform.position = Vector3.Lerp(transform.position, targetPos, cameraSpeed * Time.deltaTime);
+        MainCamera.transform.position = Vector3.Lerp(transform.position, targetPos, cameraSpeed * Time.deltaTime);
     }
 
+    //camera follow object
     public void FocusCamera(Vector3 pos)
     {
-        transform.position = Vector3.Lerp(transform.position, pos, cameraSpeed * Time.deltaTime);
+        MainCamera.transform.position = Vector3.Lerp(transform.position, pos, cameraSpeed * Time.deltaTime);
     }
 
-    public Vector3 GetCamPos()
+    
+    //Camera Zoom in out
+    public void Zoom()
     {
-        Vector3 temp = transform.position;
-        return temp;
+        float distance = Input.GetAxis("Mouse ScrollWheel") * -1 * 5.0f;
+        if (distance != 0)
+        {
+            MainCamera.fieldOfView += distance;
+        }
     }
 }
-

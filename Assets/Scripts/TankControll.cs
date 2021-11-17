@@ -12,6 +12,7 @@ public class TankControll : MonoBehaviour
     private Vector3 r = new Vector3 (1.0f, 1.0f, 1.0f);
     private float angle;
     private RaycastHit2D hit;
+    public AudioClip moveClip;
 
     public void Start()
     {
@@ -32,6 +33,8 @@ public class TankControll : MonoBehaviour
             if (transform.eulerAngles.y != 180) {transform.eulerAngles = new Vector3 (0,180, 180 - transform.eulerAngles.z);}
             move2D.Dir = Vector3.left;
             move2D.MoveX ();
+            if(Audio.go == null)
+                Audio.instance.PlaySound("Move", moveClip);
             tankAnimator.AddMoveEffect ();
             tankAnimator.isMove (true);   //좌, 우 입력이 있다면 move로 이동
         }
@@ -42,12 +45,15 @@ public class TankControll : MonoBehaviour
             move2D.MoveX ();
             tankAnimator.AddMoveEffect ();
             tankAnimator.isMove (true);   //좌, 우 입력이 있다면 move로 이동
+            if (Audio.go == null)
+                Audio.instance.PlaySound("Move", moveClip);
         }
         
         //좌-우 입력이 없다면 idle로 이동
         if (!(Input.GetKey (KeyCode.LeftArrow) || Input.GetKey (KeyCode.RightArrow))) {
             tankAnimator.isMove (false);
             tankAnimator.DeleteMoveEffect ();
+            
         }
 
         if (Input.GetKey (KeyCode.UpArrow)) {

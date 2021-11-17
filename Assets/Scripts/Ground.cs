@@ -40,7 +40,7 @@ public class Ground : MonoBehaviour
         gameObject.AddComponent<PolygonCollider2D>();
     }
 
-    public void MakeAHole(CircleCollider2D c2d)
+    public void MakeAHole(PolygonCollider2D c2d)
     {
         Vector2Int colliderCenter = WorldToPixel(c2d.bounds.center);
         int radius = Mathf.RoundToInt(c2d.bounds.size.x / 2 * pixelWidth / worldWidth);
@@ -49,7 +49,7 @@ public class Ground : MonoBehaviour
         for (int i = 0; i < radius; i++)
         {
             distance = Mathf.RoundToInt(Mathf.Sqrt(radius * radius - i * i));
-            Debug.Log(distance);
+            //Debug.Log(distance);
             for (int j = 0; j < distance; j++)
             {
                 px = colliderCenter.x + i;
@@ -73,9 +73,11 @@ public class Ground : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.GetComponent<CircleCollider2D>()) return;
+        //if (!collision.GetComponent<CircleCollider2D>()) return;
+        if (!collision.GetComponent<PolygonCollider2D>()) return;
 
-        MakeAHole(collision.GetComponent<CircleCollider2D>());
+        //MakeAHole(collision.GetComponent<CircleCollider2D>());
+        MakeAHole(collision.GetComponent<PolygonCollider2D>());
     }
 
     public void MakeDot(Vector3 pos)
