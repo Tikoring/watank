@@ -73,7 +73,7 @@ public class Attack : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space))
         {
             if (charging) {
-                cam.FocusBullet = true;
+                //cam.FocusBullet = true;
                 projectilePrefab.Fire(power * 1.5f, attackPos);
             }
             firePermission = projectilePrefab.FirePermission;

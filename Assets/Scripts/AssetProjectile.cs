@@ -37,7 +37,7 @@ public class AssetProjectile : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Stage") {
+        if (collision.tag == "Field") {
             coll = true;
             apAnimator.SetBool ("Explosion", true);
             rd.gravityScale = 0;
