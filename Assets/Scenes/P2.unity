@@ -874,6 +874,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1359612576501671829, guid: 2364dc1f859628349b5a07d7cb9e24d5, type: 3}
+      propertyPath: orthographic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359612576501671829, guid: 2364dc1f859628349b5a07d7cb9e24d5, type: 3}
+      propertyPath: m_FOVAxisMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359612576501671829, guid: 2364dc1f859628349b5a07d7cb9e24d5, type: 3}
+      propertyPath: far clip plane
+      value: 100000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359612576501671829, guid: 2364dc1f859628349b5a07d7cb9e24d5, type: 3}
+      propertyPath: near clip plane
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1359612576501671830, guid: 2364dc1f859628349b5a07d7cb9e24d5, type: 3}
       propertyPath: m_Name
       value: Camera
@@ -1165,11 +1181,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6977006319575623112, guid: 5f59e0272e66a224eb42f3940ad1350f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.1
+      value: -2.6
       objectReference: {fileID: 0}
     - target: {fileID: 6977006319575623112, guid: 5f59e0272e66a224eb42f3940ad1350f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.1
+      value: 3.6
       objectReference: {fileID: 0}
     - target: {fileID: 6977006319575623112, guid: 5f59e0272e66a224eb42f3940ad1350f, type: 3}
       propertyPath: m_LocalPosition.z

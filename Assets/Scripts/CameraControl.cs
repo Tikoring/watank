@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
-    public static Camera MainCamera;
+    private Camera MainCamera;
     private static float cameraSpeed = 5.0f;
     private bool IsHold = true;
     private Vector3 targetPos;
-    private float distance = 0;
+    //private float distance = 0;
     public bool FocusBullet = false;
     GameObject tank;
     // Start is called before the first frame update
@@ -32,7 +32,7 @@ public class CameraControl : MonoBehaviour
         //follow bullet
         if (FocusBullet == true && AssetProjectile.bullet != null)
         {
-            targetPos.Set(AssetProjectile.bullet.transform.position.x, AssetProjectile.bullet.transform.position.y, this.transform.position.z + distance);
+            targetPos.Set(AssetProjectile.bullet.transform.position.x, AssetProjectile.bullet.transform.position.y, this.transform.position.z);
             FocusCamera(targetPos);
         }
         //follow tank
@@ -83,7 +83,9 @@ public class CameraControl : MonoBehaviour
         float distance = Input.GetAxis("Mouse ScrollWheel") * -1 * 5.0f;
         if (distance != 0)
         {
-            MainCamera.fieldOfView += distance;
+            //MainCamera.fieldOfView += distance;
+            Camera.main.orthographicSize += distance;
         }
+        Debug.Log(distance);
     }
 }
