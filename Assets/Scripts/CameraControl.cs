@@ -86,6 +86,5 @@ public class CameraControl : MonoBehaviour
             //MainCamera.fieldOfView += distance;
             Camera.main.orthographicSize += distance;
         }
-        Debug.Log(distance);
     }
 }

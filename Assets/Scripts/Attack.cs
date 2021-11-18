@@ -94,6 +94,7 @@ public class Attack : MonoBehaviour
                 StartCoroutine ("AttackTwice");     //skill 사용을 위한 coroutine
                 twice = false;
             }
+            this.gameObject.GetComponent<TankControll> ().SkillManager.Access = 0;
         }
     }
     private IEnumerator AttackTwice () {

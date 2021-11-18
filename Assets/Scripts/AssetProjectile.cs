@@ -61,6 +61,7 @@ public class AssetProjectile : MonoBehaviour
         if (collision.tag == "Stage") {
             this.transform.localScale = expScale;
             sr.color = Color.white;
+        }
         if (collision.tag == "Field") {
             this.transform.localScale = expScale;
             sr.color = Color.white;
