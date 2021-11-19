@@ -17,15 +17,6 @@ public class Ground : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer> ();
         newTexture = Instantiate(srcTexture);
-        // newTexture = new Texture2D(100, 20);
-
-        // for (int i = 0; i < newTexture.width; i++ )
-        // {
-        //     for (int j = 0; j < newTexture.height; j++ )
-        //     {
-        //         newTexture.SetPixel(i, j, Color.white);
-        //     }
-        // }
 
         newTexture.Apply();
         MakeSprite();
