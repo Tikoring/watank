@@ -10,7 +10,7 @@ public class Attack : MonoBehaviour
     [SerializeField]
     private GameObject attackPos;   // 투사체 시작 위치
     [SerializeField]
-    private Text powerText;     // Power text
+    private Slider powerBar;     // Power bar
     private bool firePermission;
     private bool charging;
     private bool reverseCharging;
@@ -36,15 +36,16 @@ public class Attack : MonoBehaviour
         if (firePermission) {
             CheckInput();
         }
-        UpdatePowerText();
+        UpdatePowerBar();
         firePermission = projectilePrefab.FirePermission;   //포탄이 파괴 됐을 때 값의 변경을 위해 Update에서 계속 초기화
         if (AssetProjectile.bullet == null)
             cam.FocusBullet = false;
     }
 
-    private void UpdatePowerText()
+    private void UpdatePowerBar()
     {
-        powerText.text = "Power : " + power.ToString();
+        // 4: default power, 16: max power - default power
+        powerBar.value = ((float)power - 4) / 16;
     }
     private void CheckInput()
     {

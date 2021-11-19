@@ -84,6 +84,10 @@ public class AssetProjectile : MonoBehaviour
             Audio.instance.PlaySound("Explosion", explosionClip);
             Destroy(gameObject, 0.67f);
         }
+        if (collision.tag == "Out") {
+            Destroy(gameObject);
+        }
+        
     }
     //projectile의 방향과 각도가 일치하게 update
     //rigidbody를 이용해 이동을 하기 때문에 fixed update를 해야 충돌이 없음
