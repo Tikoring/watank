@@ -15,12 +15,19 @@ public class Attack : MonoBehaviour
     private bool charging;
     private bool reverseCharging;
     private float power;
+    private bool twice;
+    public bool Twice {
+        get {return twice;}
+        set {twice = value;}
+    }
+    public AssetProjectile ProjectilePrefab => projectilePrefab;
     CameraControl cam;
     public AudioClip attackClip;
     void Start() {
         charging = false;
         power = 4f;
         firePermission = projectilePrefab.FirePermission;
+        twice = false;
         cam = GameObject.FindObjectOfType<CameraControl>();
     }
 
@@ -74,15 +81,32 @@ public class Attack : MonoBehaviour
         // 키를 뗄 때 Fire, charging, reverseCharging, power 초기화
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            if (charging) {
-                projectilePrefab.Fire(power * 2.5f, attackPos);
+            if (charging && !twice) {
                 cam.FocusBullet = true;
+                charging = false;
+                reverseCharging = false;
+                projectilePrefab.Fire(power * 1.5f, attackPos);
+                firePermission = projectilePrefab.FirePermission;
                 Audio.instance.PlaySound("Attack", attackClip);
+                power = 4f;
+            } 
+            if (charging && twice) {
+                StartCoroutine ("AttackTwice");     //skill 사용을 위한 coroutine
+                twice = false;
             }
-            firePermission = projectilePrefab.FirePermission;
-            reverseCharging = false;
-            charging = false;
-            power = 4f;
+            this.gameObject.GetComponent<TankControll> ().SkillManager.Access = 0;
         }
+    }
+    private IEnumerator AttackTwice () {
+        cam.FocusBullet = true;
+        charging = false;
+        reverseCharging = false;
+        projectilePrefab.Fire(power * 1.5f, attackPos);
+        Audio.instance.PlaySound("Attack", attackClip);
+        yield return new WaitForSeconds (2.5f);
+        projectilePrefab.Fire(power * 1.5f, attackPos);
+        firePermission = projectilePrefab.FirePermission;
+        Audio.instance.PlaySound("Attack", attackClip);
+        power = 4f;
     }
 }
