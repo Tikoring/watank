@@ -120,9 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rd: {fileID: 0}
-  power: 29.01617
+  power: 7.0826626
   explosionClip: {fileID: 8300000, guid: fd706038486fee041947a774223dc22e, type: 3}
-
 --- !u!95 &-998874639964103935
 Animator:
   serializedVersion: 3

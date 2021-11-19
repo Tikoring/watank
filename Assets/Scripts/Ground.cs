@@ -34,7 +34,7 @@ public class Ground : MonoBehaviour
     public void MakeAHole(PolygonCollider2D c2d)
     {
         Vector2Int colliderCenter = WorldToPixel(c2d.bounds.center);
-        int radius = Mathf.RoundToInt(c2d.bounds.size.x / 2 * pixelWidth / worldWidth);
+        int radius = Mathf.RoundToInt(c2d.bounds.size.x / 2 * pixelWidth / worldWidth * 5);
 
         int px, nx, py, ny, distance;
         for (int i = 0; i < radius; i++)
@@ -86,7 +86,7 @@ public class Ground : MonoBehaviour
 
     void MakeSprite()
     {
-        sr.sprite = Sprite.Create(newTexture, new Rect(0 , 0, newTexture.width, newTexture.height), Vector2.one * 0.5f);
+        sr.sprite = Sprite.Create(newTexture, new Rect(0 , 0, newTexture.width, newTexture.height), Vector2.one * 0.5f, 15f);
     }
 
     private Vector2Int WorldToPixel(Vector3 pos)
