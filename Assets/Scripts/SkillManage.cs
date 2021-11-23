@@ -4,39 +4,64 @@ using UnityEngine;
 
 //개인 skill 관리를 위한 매니저
 public class SkillManage : MonoBehaviour
-{
-    Skill skill1;
-    Skill skill2;
-    Skill skill3;
-    Skill skill4;
+{   
+    private int[] skillNumber = new int[4];
+    private Skill[] skillArray = new Skill[4];
     private KeyCode access; //keycode를 저장해서 access할 스킬정보를 저장하는 방식
     public KeyCode Access {
         get {return access;}
         set {access = value;}
     }
     private void Start() {
-        this.gameObject.AddComponent<AttackTwice> ();
-        skill1 = GetComponent<AttackTwice> ();
-        this.gameObject.AddComponent<ProjectileCololr> ();
-        skill2 = GetComponent<ProjectileCololr> ();
-        this.gameObject.AddComponent<ProjectileExceptGravity> ();
-        skill3 = GetComponent<ProjectileExceptGravity> ();
-        this.gameObject.AddComponent<ExplosionScaleUp> ();
-        skill4 = GetComponent<ExplosionScaleUp> ();
+        for (int i = 0; i < 4; i++) {
+            skillNumber[i] = (int) Random.Range (0, 6);
+            for (int j = 0; j < i; j++) {
+                if (skillNumber[i] == skillNumber[j]) {i--; break;}
+            }
+        }
+        for (int i = 0; i < 4; i++) {
+            switch (skillNumber[i]) {
+                case 0 :
+                    this.gameObject.AddComponent<TeleportProjectile> ();
+                    skillArray[i] = GetComponent<TeleportProjectile> ();
+                    break;
+                case 1 :
+                    this.gameObject.AddComponent<ProjectileExceptFiled> ();
+                    skillArray[i] = GetComponent<ProjectileExceptFiled> ();
+                    break;
+                case 2 :
+                    this.gameObject.AddComponent<ProjectileExceptGravity> ();
+                    skillArray[i] = GetComponent<ProjectileExceptGravity> ();
+                    break;
+                case 3 :
+                    this.gameObject.AddComponent<ExplosionScaleUp> ();
+                    skillArray[i] = GetComponent<ExplosionScaleUp> ();
+                    break;
+                case 4 :
+                    this.gameObject.AddComponent<ExplosionScaleDown> ();
+                    skillArray[i] = GetComponent<ExplosionScaleDown> ();
+                    break;
+                case 5 :
+                    this.gameObject.AddComponent<AttackTwice> ();
+                    skillArray[i] = GetComponent<AttackTwice> ();
+                    break;
+            }
+            Debug.Log(skillArray[i]);
+        }
     }
     public void Use () {
         switch (access) {
             case KeyCode.Alpha1 :
-                skill1.Activate ();
+                skillArray[0].Activate ();
                 break;
             case KeyCode.Alpha2 :
-                skill2.Activate ();
+                skillArray[1].Activate ();
                 break;
             case KeyCode.Alpha3 :
-                skill3.Activate ();
+                skillArray[2].Activate ();
                 break;
             case KeyCode.Alpha4 :
-                skill4.Activate ();
+                skillArray[3].Activate ();
                 break;
         }
     }
@@ -44,23 +69,18 @@ public class SkillManage : MonoBehaviour
     public void DisUse () {
         switch (access) {
             case KeyCode.Alpha1 :
-                skill1.DeActivate ();
+                skillArray[0].DeActivate ();
                 break;
             case KeyCode.Alpha2 :
-                skill2.DeActivate ();
+                skillArray[1].DeActivate ();
                 break;
             case KeyCode.Alpha3 :
-                skill3.DeActivate ();
+                skillArray[2].DeActivate ();
                 break;
             case KeyCode.Alpha4 :
-                skill4.DeActivate ();
+                skillArray[3].DeActivate ();
                 break;
         }
         access = 0;
-    }
-
-    //추후 cooldown 관련 method
-    public void TurnManaging () {
-
     }
 }

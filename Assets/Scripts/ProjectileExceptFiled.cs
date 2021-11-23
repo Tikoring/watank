@@ -2,24 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//projectile의 색상 변경 스킬
-public class ProjectileCololr : Skill
+public class ProjectileExceptFiled : Skill
 {
     private AssetProjectile assetProjectile;
     // Start is called before the first frame update
     void Start()
     {
         assetProjectile = GameObject.Find ("AssetTank").GetComponent<Attack> ().ProjectilePrefab;
+        active = false;
     }
 
     public override void Activate()
     {
-        assetProjectile.ProjetileColor = Color.green;
+        active = true;
+        assetProjectile.ExceptField = true;
+        assetProjectile.Damage = 15f;
         Debug.Log("skill Activating");
     }
 
     public override void DeActivate () {
-        assetProjectile.ProjetileColor = Color.white;
+        active = false;
+        assetProjectile.ExceptField = false;
+        assetProjectile.Damage = 30f;
         Debug.Log("skill DeActivating");
     }
 }

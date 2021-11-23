@@ -104,7 +104,7 @@ public class Attack : MonoBehaviour
         reverseCharging = false;
         projectilePrefab.Fire(power * 1.5f, attackPos);
         Audio.instance.PlaySound("Attack", attackClip);
-        yield return new WaitForSeconds (2.5f);
+        yield return new WaitForSeconds (1f);
         projectilePrefab.Fire(power * 1.5f, attackPos);
         firePermission = projectilePrefab.FirePermission;
         Audio.instance.PlaySound("Attack", attackClip);

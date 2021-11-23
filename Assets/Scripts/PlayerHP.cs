@@ -18,6 +18,10 @@ public class PlayerHP : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //hp 최솟값 설정
+        if (maxHP == 0) {
+            maxHP = 100f;
+        }
         currentHP = maxHP;
         spriteRenderer = GetComponent<SpriteRenderer> ();   
     }

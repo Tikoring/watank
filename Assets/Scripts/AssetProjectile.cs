@@ -14,8 +14,12 @@ public class AssetProjectile : MonoBehaviour
     private bool coll;
     private static Color projectileColor = Color.white; //projectile 색상 변경을 위한 static variable
     private static float gravityScale = 1.0f;           //projectile의 중력 영향 여부를 위한 값
-    private static Vector3 expScale = new Vector3 (1, 1, 1);
+    private static Vector3 expScale = new Vector3 (4.5f, 4.5f, 4.5f);
+    private static float damage = 30f;
     private Animator apAnimator;                    //projectile animator 제어
+    private GameObject player;
+    private static bool teloport = false;
+    private static bool exceptField = false;
     public bool FirePermission => firePermission;   //포탄이 발사된 동안 공격을 막기 위함
     public Color ProjetileColor {
         get {return projectileColor;}
@@ -28,6 +32,18 @@ public class AssetProjectile : MonoBehaviour
     public Vector3 ExpScale {
         get {return expScale;}
         set {expScale = value;}
+    }
+    public float Damage {
+        get {return damage;}
+        set {damage = value;}
+    }
+    public bool Teleport {
+        get {return teloport;}
+        set {teloport = value;}
+    }
+    public bool ExceptField {
+        get {return exceptField;}
+        set {exceptField = value;}
     }
     public AudioClip explosionClip;
 
@@ -44,6 +60,7 @@ public class AssetProjectile : MonoBehaviour
         firePermission = false;
         beforeY = transform.position.y;
         apAnimator = GetComponent<Animator> ();
+        player = GameObject.Find("AssetTank");
         coll = false;
     }
 
@@ -58,35 +75,48 @@ public class AssetProjectile : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Stage") {
-            this.transform.localScale = expScale;
-            sr.color = Color.white;
-        }
-        if (collision.tag == "Field") {
-            this.transform.localScale = expScale;
-            sr.color = Color.white;
-            coll = true;
-            apAnimator.SetBool ("Explosion", true);
+        if (!teloport) {
+            if (collision.tag == "Field" && !exceptField) {
+                rd.gravityScale = 0;
+                rd.velocity = Vector2.zero;
 
-            rd.gravityScale = 0;
-            rd.velocity = Vector2.zero;
-            Audio.instance.PlaySound("Explosion", explosionClip);
-            Destroy(gameObject, 0.67f);         //개선 필요함(animation이 종료될 시에 삭제되게)
+                this.transform.localScale = expScale;
+                sr.color = Color.white;
+                coll = true;
+
+                apAnimator.SetBool ("Explosion", true);;
+                Audio.instance.PlaySound("Explosion", explosionClip);
+                Destroy(gameObject, 0.67f);         //개선 필요함(animation이 종료될 시에 삭제되게)
+            }
+            if (collision.tag == "OtherPlayer") {   //상대방을 인식
+                rd.gravityScale = 0;
+                rd.velocity = Vector2.zero;
+
+                this.transform.localScale = expScale;
+                sr.color = Color.white;
+                coll = true;
+                
+                apAnimator.SetBool ("Explosion", true);
+                collision.GetComponent<PlayerHP> ().TakeDamage (damage);
+                Audio.instance.PlaySound("Explosion", explosionClip);
+                Destroy(gameObject, 0.67f);
+            }
+            if (collision.tag == "Out") {
+                Destroy(gameObject);
+            }
+        } else {
+            if (collision.tag == "Field" || collision.tag == "OtherPlayer") {
+                rd.gravityScale = 0;
+                rd.velocity = Vector2.zero;
+                player.transform.position = this.transform.position;
+                Destroy (gameObject);
+            }
+            if (collision.tag == "Out") {
+                Destroy (gameObject);
+                player.GetComponent<PlayerHP> ().TakeDamage (player.GetComponent<PlayerHP> ().CurrentHP / 2);
+            }
         }
-        if (collision.tag == "OtherPlayer") {   //상대방을 인식
-            this.transform.localScale = expScale;
-            sr.color = Color.white;
-            coll = true;
-            apAnimator.SetBool ("Explosion", true);
-            collision.GetComponent<PlayerHP> ().TakeDamage (10);
-            rd.gravityScale = 0;
-            rd.velocity = Vector2.zero;
-            Audio.instance.PlaySound("Explosion", explosionClip);
-            Destroy(gameObject, 0.67f);
-        }
-        if (collision.tag == "Out") {
-            Destroy(gameObject);
-        }
+        
         
     }
     //projectile의 방향과 각도가 일치하게 update
@@ -102,9 +132,12 @@ public class AssetProjectile : MonoBehaviour
     private void OnDestroy() {
         projectileColor = Color.white;
         gravityScale = 1.0f;
-        expScale = new Vector3 (1, 1, 1);
+        expScale = new Vector3 (4.5f, 4.5f, 4.5f);
         firePermission = true;
-        GameObject.Find("AssetTank").GetComponent<TankControll> ().SkillLock = false;
+        player.GetComponent<TankControll> ().SkillLock = false;
+        damage = 30f;
+        teloport = false;
+        exceptField = false;
     }
 
 }
