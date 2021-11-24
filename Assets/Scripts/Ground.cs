@@ -69,7 +69,7 @@ public class Ground : MonoBehaviour
 
         //MakeAHole(collision.GetComponent<CircleCollider2D>());
         //expScale은 vector값이라서 sqrMagnitud / 3에 sqrt적용해서 scale을 측정
-        if (!collision.GetComponentInParent<AssetProjectile> ().ExceptField) {MakeAHole(collision.GetComponent<PolygonCollider2D>(), Mathf.Sqrt (collision.GetComponentInParent<AssetProjectile> ().ExpScale.sqrMagnitude / 3));}
+        if (!collision.GetComponentInParent<AssetProjectile> ().ExceptField && !collision.GetComponentInParent<AssetProjectile> ().Teleport) {MakeAHole(collision.GetComponent<PolygonCollider2D>(), Mathf.Sqrt (collision.GetComponentInParent<AssetProjectile> ().ExpScale.sqrMagnitude / 3));}
     }
 
     public void MakeDot(Vector3 pos)
