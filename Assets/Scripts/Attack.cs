@@ -22,7 +22,6 @@ public class Attack : MonoBehaviour
     }
     public AssetProjectile ProjectilePrefab => projectilePrefab;
     CameraControl cam;
-    public AudioClip attackClip;
     void Start() {
         charging = false;
         power = 4f;
@@ -88,7 +87,8 @@ public class Attack : MonoBehaviour
                 reverseCharging = false;
                 projectilePrefab.Fire(power * 1.5f, attackPos);
                 firePermission = projectilePrefab.FirePermission;
-                Audio.instance.PlaySound("Attack", attackClip);
+                //Audio.instance.PlaySound("Attack", attackClip);
+                AudioManager.Instance.PlaySFXSound("BulletSound");
                 power = 4f;
             } 
             if (charging && twice) {
@@ -103,11 +103,13 @@ public class Attack : MonoBehaviour
         charging = false;
         reverseCharging = false;
         projectilePrefab.Fire(power * 1.5f, attackPos);
-        Audio.instance.PlaySound("Attack", attackClip);
+        AudioManager.Instance.PlaySFXSound("BulletSound");
         yield return new WaitForSeconds (2.5f);
         projectilePrefab.Fire(power * 1.5f, attackPos);
         firePermission = projectilePrefab.FirePermission;
-        Audio.instance.PlaySound("Attack", attackClip);
+        AudioManager.Instance.PlaySFXSound("BulletSound");
         power = 4f;
     }
+
+    
 }

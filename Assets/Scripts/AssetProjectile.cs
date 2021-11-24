@@ -29,7 +29,6 @@ public class AssetProjectile : MonoBehaviour
         get {return expScale;}
         set {expScale = value;}
     }
-    public AudioClip explosionClip;
 
     void Start()
     {
@@ -39,7 +38,7 @@ public class AssetProjectile : MonoBehaviour
         sr.color = projectileColor;
         //print(power);
         rd.gravityScale = gravityScale;
-        rd.velocity = transform.right * power;
+        rd.velocity = transform.right * power + WindScript.getWind();
         Destroy(gameObject, 15);
         firePermission = false;
         beforeY = transform.position.y;
@@ -70,7 +69,9 @@ public class AssetProjectile : MonoBehaviour
 
             rd.gravityScale = 0;
             rd.velocity = Vector2.zero;
-            Audio.instance.PlaySound("Explosion", explosionClip);
+            AudioManager.Instance.PlaySFXSound("ExplosionSound");
+            //폭발 후 wind 값 변경
+            WindScript.setWind();
             Destroy(gameObject, 0.67f);         //개선 필요함(animation이 종료될 시에 삭제되게)
         }
         if (collision.tag == "OtherPlayer") {   //상대방을 인식
@@ -81,13 +82,14 @@ public class AssetProjectile : MonoBehaviour
             collision.GetComponent<PlayerHP> ().TakeDamage (10);
             rd.gravityScale = 0;
             rd.velocity = Vector2.zero;
-            Audio.instance.PlaySound("Explosion", explosionClip);
+            AudioManager.Instance.PlaySFXSound("ExplosionSound");
+            //폭발 후 wind 값 변경
+            WindScript.setWind();
             Destroy(gameObject, 0.67f);
         }
         if (collision.tag == "Out") {
             Destroy(gameObject);
         }
-        
     }
     //projectile의 방향과 각도가 일치하게 update
     //rigidbody를 이용해 이동을 하기 때문에 fixed update를 해야 충돌이 없음

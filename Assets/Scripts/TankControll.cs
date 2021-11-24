@@ -14,7 +14,6 @@ public class TankControll : MonoBehaviour
     private bool skillLock = false;     //skill이 온되면 다른 skill을 온 할수 없게 함(off후에는 사용가능)
     private float angle;
     private RaycastHit2D hit;
-    public AudioClip moveClip;
 
     public bool SkillLock {
         get {return skillLock;}
@@ -42,8 +41,9 @@ public class TankControll : MonoBehaviour
             if (transform.eulerAngles.y != 180) {transform.eulerAngles = new Vector3 (0,180, 180 - transform.eulerAngles.z);}
             move2D.Dir = Vector3.left;
             move2D.MoveX ();
-            if(Audio.go == null)
-                Audio.instance.PlaySound("Move", moveClip);
+            //if(AudioManager == null)
+            if (AudioManager.go == null)
+                AudioManager.Instance.PlaySFXSound("TankMoveAudio");
             tankAnimator.AddMoveEffect ();
             tankAnimator.isMove (true);   //좌, 우 입력이 있다면 move로 이동
         }
@@ -54,8 +54,10 @@ public class TankControll : MonoBehaviour
             move2D.MoveX ();
             tankAnimator.AddMoveEffect ();
             tankAnimator.isMove (true);   //좌, 우 입력이 있다면 move로 이동
-            if (Audio.go == null)
-                Audio.instance.PlaySound("Move", moveClip);
+            //if (Audio.go == null)
+            //    Audio.instance.PlaySound("Move", moveClip);
+            if (AudioManager.go == null)
+                AudioManager.Instance.PlaySFXSound("TankMoveAudio");
         }
         
         //좌-우 입력이 없다면 idle로 이동
