@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 6977006319575623109}
   - component: {fileID: 6977006319575623110}
   - component: {fileID: 6977006319575623108}
-  - component: {fileID: 5696453840021283037}
   - component: {fileID: -708745250956426045}
+  - component: {fileID: 6375262937260559687}
   - component: {fileID: 7910386276734658130}
   - component: {fileID: 8376299383118278134}
   - component: {fileID: 2294426509464222538}
@@ -152,6 +152,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f0b51026580cc84384f140c49399648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveClip: {fileID: 0}
+  maxMoveDuration: 5
+  moveDuration: 0
+  moveBar: {fileID: 0}
+  maxTime: 60
+  remainTime: 0
+  remainTimeText: {fileID: 0}
 --- !u!114 &6977006319575623108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,19 +171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 511792744e2e4984f8b7b4e950663fe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5696453840021283037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6977006319575623113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7be106d48e41dd84ebaae5149ecca871, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  circleId: 0
 --- !u!114 &-708745250956426045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,7 +184,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 0
-  HPtext: {fileID: 0}
+  hpBar: {fileID: 0}
+--- !u!114 &6375262937260559687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6977006319575623113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd294f0f33400694eaa0d4473aa912e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpBar: {fileID: 0}
+  playerHpPos: {fileID: 0}
 --- !u!114 &7910386276734658130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,7 +213,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 7182662119249690736, guid: 56e697895e30900469099470f6221f4a, type: 3}
   attackPos: {fileID: 6977006319992121092}
-  powerText: {fileID: 0}
+  powerBar: {fileID: 0}
+  attackClip: {fileID: 0}
 --- !u!114 &8376299383118278134
 MonoBehaviour:
   m_ObjectHideFlags: 0
