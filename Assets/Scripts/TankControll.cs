@@ -20,6 +20,7 @@ public class TankControll : MonoBehaviour
     public float maxMoveDuration = 5f;      // 최대 이동 시간
     public float moveDuration = 0.0f;   // 좌우 키 입력 시간, 턴 시작할 때 이 부분 초기화
     public Slider moveBar;     // Power bar
+    public Slider playerHeadHp;
 
     public float maxTime = 60f;
     public float remainTime;    // 턴 시작할 때 이 부분 초기화
@@ -63,6 +64,7 @@ public class TankControll : MonoBehaviour
         remainTime -= Time.deltaTime;   // remainTime < 0이 되면 턴 종료 event
 
         if (Input.GetKey (KeyCode.LeftArrow)) {
+            playerHeadHp.transform.localScale = new Vector3(-0.16f, 0.16f, 0.16f);
             moveDuration += Time.deltaTime;
             if (transform.eulerAngles.y != 180) {transform.eulerAngles = new Vector3 (0,180, 180 - transform.eulerAngles.z);}
             move2D.Dir = Vector3.left;
@@ -78,6 +80,7 @@ public class TankControll : MonoBehaviour
         }
         
         if (Input.GetKey (KeyCode.RightArrow)) {
+            playerHeadHp.transform.localScale = new Vector3(0.16f, 0.16f, 0.16f);
             moveDuration += Time.deltaTime;
             if (transform.eulerAngles.y == 180) {transform.eulerAngles = new Vector3 (0, 0, transform.eulerAngles.z);}
             move2D.Dir = Vector3.right;
