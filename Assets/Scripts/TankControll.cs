@@ -17,7 +17,6 @@ public class TankControll : MonoBehaviour
     private bool ownTurn = true;        //ownTurn이 false가 되면, SkillManage의 access가 0이 되게해야함(턴 구현 되면 추가해야하는 요소)
     private float angle;
     private RaycastHit2D hit;
-    public AudioClip moveClip;
 
     public float maxMoveDuration = 5f;      // 최대 이동 시간
     public float moveDuration = 0.0f;   // 좌우 키 입력 시간, 턴 시작할 때 이 부분 초기화
@@ -77,8 +76,8 @@ public class TankControll : MonoBehaviour
                 if (maxMoveDuration - moveDuration > 0)
                 {
                     move2D.MoveX ();
-                    if(Audio.go == null)
-                        Audio.instance.PlaySound("Move", moveClip);
+                    if (AudioManager.go == null)
+                        AudioManager.Instance.PlaySFXSound("TankMoveAudio");
                     tankAnimator.AddMoveEffect ();
                     tankAnimator.isMove (true);   //좌, 우 입력이 있다면 move로 이동
                 }
@@ -92,10 +91,10 @@ public class TankControll : MonoBehaviour
                 if (maxMoveDuration - moveDuration > 0)
                 {
                     move2D.MoveX ();
+                    if (AudioManager.go == null)
+                        AudioManager.Instance.PlaySFXSound("TankMoveAudio");
                     tankAnimator.AddMoveEffect ();
                     tankAnimator.isMove (true);   //좌, 우 입력이 있다면 move로 이동
-                    if (Audio.go == null)
-                        Audio.instance.PlaySound("Move", moveClip);
                 }
             }
             //좌-우 입력이 없다면 idle로 이동

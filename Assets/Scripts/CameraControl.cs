@@ -17,6 +17,7 @@ public class CameraControl : MonoBehaviour
         MainCamera = GetComponent<Camera>();
         //when camera is focus mode, camera follow tank
         tank = GameObject.Find("AssetTank");
+        AudioManager.Instance.PlayBGMSound();
     }
 
     // Update is called once per frame
@@ -80,10 +81,17 @@ public class CameraControl : MonoBehaviour
     //Camera Zoom in out
     public void Zoom()
     {
-        float distance = Input.GetAxis("Mouse ScrollWheel") * -1 * 5.0f;
-        if (distance != 0)
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        if (scroll < 0 && Camera.main.orthographicSize <= 40)
         {
-            //MainCamera.fieldOfView += distance;
+            //scrol down
+            float distance = scroll * 5.0f;
+            Camera.main.orthographicSize -= distance;
+        }
+        else if(scroll > 0 && Camera.main.orthographicSize + scroll * -1 * 5.0f > 0)
+        {
+            //scroll up
+            float distance = scroll * -1 * 5.0f;
             Camera.main.orthographicSize += distance;
         }
     }

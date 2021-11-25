@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Audio : MonoBehaviour
 {
+    public AudioSource audioSource;
     public static Audio instance;
     public static GameObject go;
     // Start is called before the first frame update
@@ -24,7 +25,7 @@ public class Audio : MonoBehaviour
     public void PlaySound(string action, AudioClip clip)
     {
         go = new GameObject(action + "audio");
-        AudioSource audioSource = go.AddComponent<AudioSource>();
+        audioSource = go.AddComponent<AudioSource>();
         audioSource.clip = clip;
         audioSource.Play();
         Destroy(go, clip.length);
