@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplosionScaleUp : Skill
+public class ExplosionScaleDown : Skill
 {
     private AssetProjectile assetProjectile;
     // Start is called before the first frame update
@@ -15,8 +15,8 @@ public class ExplosionScaleUp : Skill
     public override void Activate()
     {
         active = true;
-        assetProjectile.ExpScale *= 2;
-        assetProjectile.Damage = 15f;
+        assetProjectile.ExpScale /= 2;
+        assetProjectile.Damage = 60f;
         Debug.Log("skill Activating");
     }
 

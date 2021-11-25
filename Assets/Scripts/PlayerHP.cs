@@ -9,7 +9,10 @@ public class PlayerHP : MonoBehaviour
     [SerializeField]
     private float maxHP;
     [SerializeField]
-    private Text HPtext;
+    // private Text HPtext;
+    private Slider hpBar;     // Hp bar
+    [SerializeField]
+    private Slider headHpBar;
     private float currentHP;
     private SpriteRenderer spriteRenderer;
 
@@ -18,6 +21,10 @@ public class PlayerHP : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //hp 최솟값 설정
+        if (maxHP == 0) {
+            maxHP = 100f;
+        }
         currentHP = maxHP;
         spriteRenderer = GetComponent<SpriteRenderer> ();   
     }
@@ -27,7 +34,9 @@ public class PlayerHP : MonoBehaviour
     }
 
     private void UpdateHPView () {
-        HPtext.text = "HP : " + currentHP.ToString ();
+        // HPtext.text = "HP : " + currentHP.ToString ();
+        hpBar.value = (float)currentHP/maxHP;
+        headHpBar.value = (float)currentHP/maxHP;
     }
     // Update is called once per frame
 

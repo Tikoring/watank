@@ -44,3 +44,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Adove Object
+    uniqueID: 102117467
+    locked: 0
+  - name: New Layer
+    uniqueID: 683744435
+    locked: 0
