@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplosionScaleUp : Skill
+//projectile의 탄착지점으로 이동하는 스킬(폭발, 데미지 제거)
+//outline으로 나가게 되면 현재 체력의 절반만큼 피해를 입음
+public class TeleportProjectile : Skill
 {
     private AssetProjectile assetProjectile;
     // Start is called before the first frame update
@@ -10,20 +12,19 @@ public class ExplosionScaleUp : Skill
     {
         assetProjectile = GameObject.Find ("AssetTank").GetComponent<Attack> ().ProjectilePrefab;
         active = false;
+
     }
 
     public override void Activate()
     {
         active = true;
-        assetProjectile.ExpScale *= 2;
-        assetProjectile.Damage = 15f;
+        assetProjectile.Teleport = true;
         Debug.Log("skill Activating");
     }
 
     public override void DeActivate () {
         active = false;
-        assetProjectile.ExpScale = new Vector3 (4.5f, 4.5f, 4.5f);
-        assetProjectile.Damage = 30f;
+        assetProjectile.Teleport = false;
         Debug.Log("skill DeActivating");
     }
 }
