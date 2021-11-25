@@ -12,6 +12,8 @@ public class Ground : MonoBehaviour
     float worldWidth, worldHeight;
     int pixelWidth, pixelHeight;
 
+    public int radius = 70;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,8 +36,6 @@ public class Ground : MonoBehaviour
     public void MakeAHole(PolygonCollider2D c2d, float scale)
     {
         Vector2Int colliderCenter = WorldToPixel(c2d.bounds.center);
-        int radius = Mathf.RoundToInt(c2d.bounds.size.x / 2 * pixelWidth / worldWidth * scale);
-        Debug.Log(radius);
         int px, nx, py, ny, distance;
         for (int i = 0; i < radius; i++)
         {
