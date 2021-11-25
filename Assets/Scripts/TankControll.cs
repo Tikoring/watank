@@ -97,16 +97,17 @@ public class TankControll : MonoBehaviour
                     tankAnimator.isMove (true);   //좌, 우 입력이 있다면 move로 이동
                 }
             }
-            //좌-우 입력이 없다면 idle로 이동
-            if (!(Input.GetKey (KeyCode.LeftArrow) || Input.GetKey (KeyCode.RightArrow))) {
-                tankAnimator.isMove (false);
-                tankAnimator.DeleteMoveEffect ();
-            }
 
             angle = Vector2.Angle (hit.normal, Vector2.right);
             angle -= 90;
             if (transform.eulerAngles.y == 180) {angle *= -1;}
             transform.eulerAngles = new Vector3 (0, transform.eulerAngles.y, angle);  //현재 지면의 각도와 tank의 기본각도를 맞춤
+        }
+
+        //좌-우 입력이 없다면 idle로 이동
+        if (!(Input.GetKey (KeyCode.LeftArrow) || Input.GetKey (KeyCode.RightArrow))) {
+            tankAnimator.isMove (false);
+            tankAnimator.DeleteMoveEffect ();
         }
 
         if (Input.GetKey (KeyCode.UpArrow)) {

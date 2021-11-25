@@ -36,10 +36,11 @@ public class Ground : MonoBehaviour
     public void MakeAHole(PolygonCollider2D c2d, float scale)
     {
         Vector2Int colliderCenter = WorldToPixel(c2d.bounds.center);
+        int applicateRadius = (int)(radius * scale);
         int px, nx, py, ny, distance;
-        for (int i = 0; i < radius; i++)
+        for (int i = 0; i < applicateRadius; i++)
         {
-            distance = Mathf.RoundToInt(Mathf.Sqrt(radius * radius - i * i));
+            distance = Mathf.RoundToInt(Mathf.Sqrt(applicateRadius * applicateRadius - i * i));
             //Debug.Log(distance);
             for (int j = 0; j < distance; j++)
             {
@@ -69,7 +70,7 @@ public class Ground : MonoBehaviour
 
         //MakeAHole(collision.GetComponent<CircleCollider2D>());
         //expScale은 vector값이라서 sqrMagnitud / 3에 sqrt적용해서 scale을 측정
-        if (!collision.GetComponentInParent<AssetProjectile> ().ExceptField && !collision.GetComponentInParent<AssetProjectile> ().Teleport) {MakeAHole(collision.GetComponent<PolygonCollider2D>(), Mathf.Sqrt (collision.GetComponentInParent<AssetProjectile> ().ExpScale.sqrMagnitude / 3));}
+        if (!collision.GetComponentInParent<AssetProjectile> ().ExceptField && !collision.GetComponentInParent<AssetProjectile> ().Teleport) {MakeAHole(collision.GetComponent<PolygonCollider2D>(), collision.GetComponentInParent<AssetProjectile> ().ExpScale);}
     }
 
     public void MakeDot(Vector3 pos)

@@ -15,9 +15,9 @@ public class WindText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 wind = WindScript.getWind();
+        Vector2 wind = WindScript.getWind();
         //벡터 방향값을 풍속으로 나타내도록
-        float windSpeed = wind.magnitude;
-        WindT.text = string.Format("{0:N2}", windSpeed) + " / ms";
+        float windSpeed = wind.x;
+        WindT.text = string.Format("{0:N2}", windSpeed * 20) + " / ms";
     }
 }
