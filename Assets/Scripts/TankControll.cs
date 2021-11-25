@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TankControll : MonoBehaviour
 {
@@ -16,11 +17,27 @@ public class TankControll : MonoBehaviour
     private RaycastHit2D hit;
     public AudioClip moveClip;
 
+    public float maxMoveDuration = 5f;      // 최대 이동 시간
+    public float moveDuration = 0.0f;   // 좌우 키 입력 시간, 턴 시작할 때 이 부분 초기화
+    public Slider moveBar;     // Power bar
+    public Slider playerHeadHp;
+
+    public float maxTime = 60f;
+    public float remainTime;    // 턴 시작할 때 이 부분 초기화
+    public Text remainTimeText;
+
     public bool SkillLock {
         get {return skillLock;}
         set {skillLock = value;}
     }
     public SkillManage SkillManager => skillManager;
+
+    private void UpdateUI()
+    {
+        // 4: default power, 16: max power - default power
+        moveBar.value = (maxMoveDuration - moveDuration)/ maxMoveDuration;
+        remainTimeText.text = ((int)remainTime).ToString();
+    }
 
     public void Start()
     {
@@ -35,27 +52,47 @@ public class TankControll : MonoBehaviour
         if (move2D.Speed == 0) {
             move2D.Speed = 3.0f;
         }
+
+        // for UI
+        remainTime = maxTime;
     }
     
     private void Update () {
+        // 이동 게이지 업데이트
+        UpdateUI();
+
+        remainTime -= Time.deltaTime;   // remainTime < 0이 되면 턴 종료 event
+
         if (Input.GetKey (KeyCode.LeftArrow)) {
+            playerHeadHp.transform.localScale = new Vector3(-0.16f, 0.16f, 0.16f);
+            moveDuration += Time.deltaTime;
             if (transform.eulerAngles.y != 180) {transform.eulerAngles = new Vector3 (0,180, 180 - transform.eulerAngles.z);}
             move2D.Dir = Vector3.left;
-            move2D.MoveX ();
-            if(Audio.go == null)
-                Audio.instance.PlaySound("Move", moveClip);
-            tankAnimator.AddMoveEffect ();
-            tankAnimator.isMove (true);   //좌, 우 입력이 있다면 move로 이동
+            
+            if (maxMoveDuration - moveDuration > 0)
+            {
+                move2D.MoveX ();
+                if(Audio.go == null)
+                    Audio.instance.PlaySound("Move", moveClip);
+                tankAnimator.AddMoveEffect ();
+                tankAnimator.isMove (true);   //좌, 우 입력이 있다면 move로 이동
+            }
         }
         
         if (Input.GetKey (KeyCode.RightArrow)) {
+            playerHeadHp.transform.localScale = new Vector3(0.16f, 0.16f, 0.16f);
+            moveDuration += Time.deltaTime;
             if (transform.eulerAngles.y == 180) {transform.eulerAngles = new Vector3 (0, 0, transform.eulerAngles.z);}
             move2D.Dir = Vector3.right;
-            move2D.MoveX ();
-            tankAnimator.AddMoveEffect ();
-            tankAnimator.isMove (true);   //좌, 우 입력이 있다면 move로 이동
-            if (Audio.go == null)
-                Audio.instance.PlaySound("Move", moveClip);
+
+            if (maxMoveDuration - moveDuration > 0)
+            {
+                move2D.MoveX ();
+                tankAnimator.AddMoveEffect ();
+                tankAnimator.isMove (true);   //좌, 우 입력이 있다면 move로 이동
+                if (Audio.go == null)
+                    Audio.instance.PlaySound("Move", moveClip);
+            }
         }
         
         //좌-우 입력이 없다면 idle로 이동

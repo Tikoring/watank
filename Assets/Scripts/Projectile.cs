@@ -33,11 +33,12 @@ public class Projectile : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log(collision.tag);
         if (collision.tag == "Stage") {
             Destroy(gameObject);
             Audio.instance.PlaySound("Explosion", explosionClip);
         }
-        if (collision.tag == "OtherPlayer") {  //상대방을 인식
+        if (collision.tag == "Player") {  //상대방을 인식
             collision.GetComponent<PlayerHP> ().TakeDamage (10);
             Audio.instance.PlaySound("Explosion", explosionClip);
             Destroy (gameObject);
