@@ -6,16 +6,24 @@ using UnityEngine.UI;
 public class AudioControl : MonoBehaviour
 {
     // Start is called before the first frame update
-    Text AudioText;
+    Text BGMAudioText;
+    Text SFXAudioText;
 
     private void Start()
     {
-        AudioText = GetComponent<Text>();
+        BGMAudioText = GetComponent<Text>();
+        SFXAudioText = GetComponent<Text>();
     }
 
-    public void AudioUpdate(float value)
+    public void BGMAudioUpdate(float value)
     {
-        AudioText.text = Mathf.RoundToInt(value * 100) + "%";
-        AudioManager.Instance.setVolume(value);
+        BGMAudioText.text = Mathf.RoundToInt(value * 100) + "%";
+        AudioManager.Instance.setBGMVolume(value);
     }
+    public void SFXAudioUpdate(float value)
+    {
+        SFXAudioText.text = Mathf.RoundToInt(value * 100) + "%";
+        AudioManager.Instance.setSFXVolume(value);
+    }
+
 }

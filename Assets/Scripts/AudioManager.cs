@@ -68,11 +68,15 @@ public class AudioManager : MonoBehaviour
 
     }
 
-    public void setVolume(float setting)
+    public void setBGMVolume(float vol)
     {
-        masterVolumeBGM = setting;
+        masterVolumeBGM = vol;
         bgmPlayer.volume = masterVolumeBGM * 1f;
-        masterVolumeSFX = setting;
+    }
+
+    public void setSFXVolume(float vol)
+    {
+        masterVolumeSFX = vol;
         sfxPlayer.volume = masterVolumeBGM * 1f;
     }
 }
