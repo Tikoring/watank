@@ -15,14 +15,14 @@ public class ExplosionScaleDown : Skill
     public override void Activate()
     {
         active = true;
-        assetProjectile.ExpScale /= 2;
+        assetProjectile.ExpScale = 0.5f;
         assetProjectile.Damage = 60f;
         Debug.Log("skill Activating");
     }
 
     public override void DeActivate () {
         active = false;
-        assetProjectile.ExpScale = new Vector3 (4.5f, 4.5f, 4.5f);
+        assetProjectile.ExpScale = 1;
         assetProjectile.Damage = 30f;
         Debug.Log("skill DeActivating");
     }

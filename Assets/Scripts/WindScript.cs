@@ -5,19 +5,19 @@ using UnityEngine;
 public class WindScript : MonoBehaviour
 {
     // Start is called before the first frame update
-    static Vector3 wind;
+    static Vector2 wind;
     void Start()
     {
-        wind.Set(Random.RandomRange(0, 4f), Random.RandomRange(0, 4f), Random.RandomRange(0, 4f));
+        wind.Set(Random.Range (-0.2f, 0.2f), 0);
     }
 
     // Update is called once per frame
 
     public static void setWind()
     {
-        wind.Set(Random.RandomRange(0, 4f), Random.RandomRange(0, 4f), Random.RandomRange(0, 4f));
+        wind.Set(Random.Range (-0.2f, 0.2f), 0);
     }
-    public static Vector3 getWind()
+    public static Vector2 getWind()
     {
         return wind;
     }

@@ -14,7 +14,7 @@ public class AssetProjectile : MonoBehaviour
     private bool coll;
     private static Color projectileColor = Color.white; //projectile 색상 변경을 위한 static variable
     private static float gravityScale = 1.0f;           //projectile의 중력 영향 여부를 위한 값
-    private static Vector3 expScale = new Vector3 (4.5f, 4.5f, 4.5f);
+    private static float expScale = 1f;
     private static float damage = 30f;
     private Animator apAnimator;                    //projectile animator 제어
     private GameObject player;
@@ -29,7 +29,7 @@ public class AssetProjectile : MonoBehaviour
         get {return gravityScale;}
         set {gravityScale = value;}
     }
-    public Vector3 ExpScale {
+    public float ExpScale {
         get {return expScale;}
         set {expScale = value;}
     }
@@ -55,7 +55,7 @@ public class AssetProjectile : MonoBehaviour
         sr.color = projectileColor;
         //print(power);
         rd.gravityScale = gravityScale;
-        rd.velocity = transform.right * power + WindScript.getWind();
+        rd.velocity = transform.right * power;
         Destroy(gameObject, 15);
         firePermission = false;
         beforeY = transform.position.y;
@@ -79,7 +79,7 @@ public class AssetProjectile : MonoBehaviour
             if (collision.tag == "Field" && !exceptField) {
                 rd.gravityScale = 0;
                 rd.velocity = Vector2.zero;
-                this.transform.localScale = expScale;
+                this.transform.localScale = new Vector3 (4.5f, 4.5f, 4.5f) * expScale;
                 sr.color = Color.white;
                 coll = true;
 
@@ -92,8 +92,7 @@ public class AssetProjectile : MonoBehaviour
             if (collision.tag == "OtherPlayer") {   //상대방을 인식
                 rd.gravityScale = 0;
                 rd.velocity = Vector2.zero;
-
-                this.transform.localScale = expScale;
+                this.transform.localScale = new Vector3 (4.5f, 4.5f, 4.5f) * expScale;
                 sr.color = Color.white;
                 coll = true;
                 
@@ -133,13 +132,16 @@ public class AssetProjectile : MonoBehaviour
         float angle = Vector2.Angle (Vector2.right, rd.velocity);
         if (afterY < beforeY) {angle *= -1;}
         beforeY = afterY;
-        if (!coll) {transform.eulerAngles = new Vector3 (0, 0, angle);}
+        if (!coll) {
+            transform.eulerAngles = new Vector3 (0, 0, angle);
+            rd.velocity += WindScript.getWind();
+        }
     }
 
     private void OnDestroy() {
         projectileColor = Color.white;
         gravityScale = 1.0f;
-        expScale = new Vector3 (4.5f, 4.5f, 4.5f);
+        expScale = 1f;
         firePermission = true;
         player.GetComponent<TankControll> ().SkillLock = false;
         damage = 30f;

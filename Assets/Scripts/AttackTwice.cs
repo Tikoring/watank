@@ -19,7 +19,7 @@ public class AttackTwice : Skill
         active = true;
         attack.Twice = true;
         attack.ProjectilePrefab.Damage = 20f;
-        attack.ProjectilePrefab.ExpScale /= 1.5f;
+        attack.ProjectilePrefab.ExpScale = 0.7f;
         Debug.Log("skill Activating");
     }
 
@@ -27,7 +27,7 @@ public class AttackTwice : Skill
         active = false;
         attack.Twice = false;
         attack.ProjectilePrefab.Damage = 30f;
-        attack.ProjectilePrefab.ExpScale = new Vector3 (4, 4, 4);
+        attack.ProjectilePrefab.ExpScale = 1f;
         Debug.Log("skill DeActivating");
     }
 }
