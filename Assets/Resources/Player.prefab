@@ -165,6 +165,7 @@ MonoBehaviour:
   PV: {fileID: -7514675302258388331}
   tankControllScript: {fileID: 6977006319575623110}
   TS: {fileID: 6977006319575623112}
+  AN: {fileID: 3432076459247702241}
 --- !u!212 &8628251644806855006
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -205,7 +206,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 55fff4863d67567498ac922421537076, type: 3}
+  m_Sprite: {fileID: -3898785282051474283, guid: 66bf86ca9341782409d4b66ab50ec650, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0

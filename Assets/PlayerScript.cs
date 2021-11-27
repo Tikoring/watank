@@ -14,6 +14,7 @@ public class PlayerScript : MonoBehaviourPun , IPunObservable
     public PhotonView PV;
     public TankControll tankControllScript;
     public Transform TS;
+    public Animator AN;
 
 
     Vector3 curPos;
