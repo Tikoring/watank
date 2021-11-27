@@ -6,6 +6,19 @@ TagManager:
   tags:
   - Field
   - Stage
+  - Out
+  - Bullet
+  - PlayerJoinID
+  - InGameUITag
+  - MoveGauge
+  - RemainTimeCount
+  - HPBar
+  - PowerBar
+  - spawnPos0
+  - spawnPos1
+  - spawnPos2
+  - spawnPos3
+  - EmptyCameraTarget
   layers:
   - Default
   - TransparentFX
@@ -42,4 +55,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Adove Object
+    uniqueID: 102117467
+    locked: 0
+  - name: New Layer
+    uniqueID: 683744435
     locked: 0
