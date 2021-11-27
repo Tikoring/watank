@@ -23,12 +23,12 @@ public class Attack : MonoBehaviour
     public AssetProjectile ProjectilePrefab => projectilePrefab;
     CameraControl cam;
     void Start() {
+        powerBar = GameObject.FindGameObjectWithTag("PowerBar").GetComponent<Slider>();
         charging = false;
         power = 4f;
         firePermission = projectilePrefab.FirePermission;
         twice = false;
         cam = GameObject.FindObjectOfType<CameraControl>();
-        powerBar = GameObject.FindGameObjectWithTag("PowerBar").GetComponent<Slider>();
     }
 
     void Update()

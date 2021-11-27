@@ -60,7 +60,22 @@ public class AssetProjectile : MonoBehaviour
         firePermission = false;
         beforeY = transform.position.y;
         apAnimator = GetComponent<Animator> ();
-        player = GameObject.Find("AssetTank");
+
+        foreach(GameObject Go in GameObject.FindGameObjectsWithTag("Player"))
+        {
+
+            if (Go.GetComponent<PlayerScript>().PV.IsMine)
+            {
+                player = Go;
+
+            }
+            else
+            {
+                player = null;
+                Debug.Log("Error! AssetProjectile can't find player object");
+            }
+
+        }
         coll = false;
     }
 
@@ -143,7 +158,7 @@ public class AssetProjectile : MonoBehaviour
         gravityScale = 1.0f;
         expScale = 1f;
         firePermission = true;
-        //player.GetComponent<TankControll> ().SkillLock = false;
+        player.GetComponent<TankControll> ().SkillLock = false;
         damage = 30f;
         teloport = false;
         exceptField = false;

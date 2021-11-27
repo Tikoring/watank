@@ -21,8 +21,7 @@ public class PlayerHP : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        hpBar = GameObject.FindGameObjectWithTag("HPBar").GetComponent<Slider>();
-
+        hpBar = GameObject.FindGameObjectWithTag("HPbar").GetComponent<Slider>();
         //hp 최솟값 설정
         if (maxHP == 0) {
             maxHP = 100f;

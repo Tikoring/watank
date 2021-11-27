@@ -13,8 +13,6 @@ public class SkillManage : MonoBehaviour
         set {access = value;}
     }
     private void Start() {
-
-/*
         for (int i = 0; i < 4; i++) {
             skillNumber[i] = (int) Random.Range (0, 6);
             for (int j = 0; j < i; j++) {
@@ -50,8 +48,6 @@ public class SkillManage : MonoBehaviour
             }
             Debug.Log(skillArray[i]);
         }
-*/
-
     }
     public void Use () {
         switch (access) {

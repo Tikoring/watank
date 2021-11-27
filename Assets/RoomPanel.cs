@@ -28,7 +28,6 @@ public class RoomPanel : MonoBehaviourPunCallbacks,IPunObservable
     [PunRPC]
     void removeRoomPanel()
     {
-        
         Debug.Log("Game Start, removeRoomPanel");
         gameObject.SetActive(false);
     }

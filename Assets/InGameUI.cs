@@ -30,7 +30,7 @@ public class InGameUI : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     void createIngameUI()
     {
-        Debug.Log("Create Ingame UI");
+        Debug.Log("Create Debug UI");
         gameObject.SetActive(true);
     }
 

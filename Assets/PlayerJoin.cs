@@ -5,7 +5,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class PlayerJoin : MonoBehaviourPunCallbacks, IPunObservable
+public class PlayerJoin : MonoBehaviourPun, IPunObservable
 {
     public PhotonView PV;
     public int myId;
@@ -14,7 +14,7 @@ public class PlayerJoin : MonoBehaviourPunCallbacks, IPunObservable
 
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         PV = photonView;
         myId = PV.ViewID;

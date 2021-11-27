@@ -6,10 +6,23 @@ using UnityEngine;
 public class ProjectileExceptGravity : Skill
 {
     private AssetProjectile assetProjectile;
+    
     // Start is called before the first frame update
     void Start()
     {
-        assetProjectile = GameObject.Find ("AssetTank").GetComponent<Attack> ().ProjectilePrefab;
+        foreach (GameObject Go in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            if (Go.GetComponent<PlayerScript>().PV.IsMine)
+            {
+                assetProjectile = Go.GetComponent<Attack>().ProjectilePrefab;
+
+            }
+            else
+            {
+                assetProjectile = null;
+                Debug.Log("Error. Can't find assetProjectile");
+            }
+        }
         active = false;
     }
 

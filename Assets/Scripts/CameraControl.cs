@@ -10,16 +10,17 @@ public class CameraControl : MonoBehaviour
     private Vector3 targetPos;
     //private float distance = 0;
     public bool FocusBullet = false;
-    GameObject cameraTarget;
+    // GameObject tank;
+    GameObject defaultPositionGO;
     // Start is called before the first frame update
     void Start()
     {
         MainCamera = GetComponent<Camera>();
         //when camera is focus mode, camera follow tank
-        //cameraTarget = GameObject.Find("AssetTank");
-        cameraTarget = GameObject.FindGameObjectWithTag("EmptyCameraTarget");
-
+        //tank = GameObject.Find("AssetTank");
+        defaultPositionGO = GameObject.Find("defaultCameraPos");
         AudioManager.Instance.PlayBGMSound();
+
     }
 
     // Update is called once per frame
@@ -41,7 +42,7 @@ public class CameraControl : MonoBehaviour
         //follow tank
         else if (IsHold == true)
         {
-            targetPos.Set(cameraTarget.transform.position.x, cameraTarget.transform.position.y, this.transform.position.z);
+            targetPos.Set(defaultPositionGO.transform.position.x, defaultPositionGO.transform.position.y, this.transform.position.z);
             FocusCamera(targetPos);
         }
         //free cam

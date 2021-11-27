@@ -4,15 +4,24 @@ using UnityEngine;
 
 //projectile의 탄착지점으로 이동하는 스킬(폭발, 데미지 제거)
 //outline으로 나가게 되면 현재 체력의 절반만큼 피해를 입음
-
-// 스킬 비활성을 위해 Skill 인터페이스 상속 제거 
-public class TeleportProjectile 
+public class TeleportProjectile : Skill
 {
-    /*private AssetProjectile assetProjectile;
+    private AssetProjectile assetProjectile;
     // Start is called before the first frame update
     void Start()
     {
-        assetProjectile = GameObject.Find ("AssetTank").GetComponent<Attack> ().ProjectilePrefab;
+        foreach(GameObject Go in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            if(Go.GetComponent<PlayerScript>().PV.IsMine)
+            {
+                assetProjectile = Go.GetComponent<Attack>().ProjectilePrefab;
+            }
+            else
+            {
+                assetProjectile = null;
+            }
+
+        }
         active = false;
 
     }
@@ -28,5 +37,5 @@ public class TeleportProjectile
         active = false;
         assetProjectile.Teleport = false;
         Debug.Log("skill DeActivating");
-    }*/
+    }
 }

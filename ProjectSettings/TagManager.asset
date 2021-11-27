@@ -9,16 +9,12 @@ TagManager:
   - Out
   - Bullet
   - PlayerJoinID
-  - InGameUITag
+  - DefaultPos
   - MoveGauge
   - RemainTimeCount
-  - HPBar
+  - HPbar
   - PowerBar
-  - spawnPos0
-  - spawnPos1
-  - spawnPos2
-  - spawnPos3
-  - EmptyCameraTarget
+  - InGameUITag
   layers:
   - Default
   - TransparentFX
