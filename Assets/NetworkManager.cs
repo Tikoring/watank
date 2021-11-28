@@ -58,6 +58,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
+        Debug.Log("[SYSTEM] : OnConnectedToMaster");
+        // Call back ¼º°ø½Ã OnJoinedRoom() 
         PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions { MaxPlayers = 4 }, null);
     }
 

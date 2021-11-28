@@ -19,7 +19,7 @@ public class CameraControl : MonoBehaviour
         //when camera is focus mode, camera follow tank
         //tank = GameObject.Find("AssetTank");
         defaultPositionGO = GameObject.Find("defaultCameraPos");
-        AudioManager.Instance.PlayBGMSound();
+        //AudioManager.Instance.PlayBGMSound();
 
     }
 
