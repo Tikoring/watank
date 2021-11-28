@@ -15,6 +15,7 @@ TagManager:
   - HPbar
   - PowerBar
   - InGameUITag
+  - Projectile
   layers:
   - Default
   - TransparentFX

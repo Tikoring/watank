@@ -85,8 +85,8 @@ public class TankControll : MonoBehaviour
                 if (maxMoveDuration - moveDuration > 0)
                 {
                     move2D.MoveX();
-                    if (AudioManager.go == null)
-                        AudioManager.Instance.PlaySFXSound("TankMoveAudio");
+                    //if (AudioManager.go == null)
+                    //    AudioManager.Instance.PlaySFXSound("TankMoveAudio");
                     tankAnimator.AddMoveEffect();
                     tankAnimator.isMove(true);   //좌, 우 입력이 있다면 move로 이동
                 }
