@@ -304,6 +304,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 7182662119249690736, guid: 56e697895e30900469099470f6221f4a, type: 3}
   attackPos: {fileID: 6977006319992121092}
   powerBar: {fileID: 3589374924578940883}
+  PlayerGameObject: {fileID: 0}
 --- !u!114 &8376299383118278134
 MonoBehaviour:
   m_ObjectHideFlags: 0

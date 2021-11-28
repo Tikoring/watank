@@ -41,6 +41,9 @@ MonoBehaviour:
   - RespawnSpaceship
   - removeRoomPanel
   - createIngameUI
+  - DestroyRPC
+  - DirRPC
+  - FireRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

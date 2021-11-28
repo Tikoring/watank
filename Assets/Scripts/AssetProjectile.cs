@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AssetProjectile : MonoBehaviour
+using Photon.Pun;
+using Photon.Realtime;
+
+public class AssetProjectile : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     private Rigidbody2D rd;
     private SpriteRenderer sr;   //sprite color 제어를 위한 render
     public float power;
-    public static AssetProjectile bullet;
+    //public static AssetProjectile bullet;
     private static bool firePermission = true;
     private float beforeY;
     private bool coll;
@@ -21,6 +24,11 @@ public class AssetProjectile : MonoBehaviour
     private static bool teloport = false;
     private static bool exceptField = false;
     public bool FirePermission => firePermission;   //포탄이 발사된 동안 공격을 막기 위함
+
+    //Server
+    public PhotonView PV;
+    int dir;
+
     public Color ProjetileColor {
         get {return projectileColor;}
         set {projectileColor = value;}
@@ -47,16 +55,22 @@ public class AssetProjectile : MonoBehaviour
     }
     public AudioClip explosionClip;
 
+    private void Awake()
+    {
+        rd = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+    }
     void Start()
     {
         print(this);
-        rd = GetComponent<Rigidbody2D>();
-        sr = GetComponent<SpriteRenderer> ();
         sr.color = projectileColor;
         //print(power);
         rd.gravityScale = gravityScale;
         rd.velocity = transform.right * power;
-        Destroy(gameObject, 15);
+        //Destroy(gameObject, 15);
+        //PV.RPC("DestroyRPC", RpcTarget.AllBuffered);
+
+
         firePermission = false;
         beforeY = transform.position.y;
         apAnimator = GetComponent<Animator> ();
@@ -80,13 +94,21 @@ public class AssetProjectile : MonoBehaviour
     }
 
     //skill은 한번에 하나씩 발동되기 때문에, color값을 인자로 받는 fire가 기본, 받지 않는 fire가 다른 스킬을 사용할 때 사용
-    public void Fire (float _power, GameObject attackPos) {
+    //이게 헷갈렸던 원인이다. 미사일을 제어하는 함수는 Attack 에 있어야하는데,
+    // 미사일을 발사하는 함수가 미사일 내부에 존재하는게 문제인것.
+
+    // 이 부분을 Attack 으로 옮겨봄.
+ /*   public void Fire (float _power, GameObject attackPos) {
         AssetProjectile instance = this;
         //print("Fire");
         instance.power = _power;
         Vector3 pos = attackPos.transform.rotation * Vector3.right / 3;
-        bullet = Instantiate(instance, attackPos.transform.position + pos, attackPos.transform.rotation);
-    }
+
+        // 이 부분이 불렛 할당 부분 
+        //bullet = Instantiate(instance, attackPos.transform.position + pos, attackPos.transform.rotation);
+        PhotonNetwork.Instantiate("AssetProjectile", attackPos.transform.position + pos, attackPos.transform.rotation);
+
+    }*/
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -102,7 +124,11 @@ public class AssetProjectile : MonoBehaviour
                 AudioManager.Instance.PlaySFXSound("ExplosionSound");
                 //폭발 후 wind 값 변경
                 WindScript.setWind();
-                Destroy(gameObject, 0.67f);         //개선 필요함(animation이 종료될 시에 삭제되게)
+                //Destroy(gameObject, 0.67f);         //개선 필요함(animation이 종료될 시에 삭제되게)
+
+                // 미사일이 필드에 도착해서 제거 
+                Debug.Log("[System] : Missile hit Field");
+                PV.RPC("DestroyRPC", RpcTarget.AllBuffered);
             }
             if (collision.tag == "OtherPlayer") {   //상대방을 인식
                 rd.gravityScale = 0;
@@ -116,30 +142,50 @@ public class AssetProjectile : MonoBehaviour
                 AudioManager.Instance.PlaySFXSound("ExplosionSound");
                 //폭발 후 wind 값 변경
                 WindScript.setWind();
-                Destroy(gameObject, 0.67f);
+                //Destroy(gameObject, 0.67f);
+
+                //미사일이 타겟에 맞아서 제거 
+                Debug.Log("[System] : Missile hit player");
+                PV.RPC("DestroyRPC", RpcTarget.AllBuffered);
             }
             if (collision.tag == "Out") {
                 //폭발 후 wind 값 변경
                 WindScript.setWind();
-                Destroy(gameObject);
+
+                //미사일이 밖으로 나가서 제거
+                Debug.Log("[System] : Missile Out");
+                PV.RPC("DestroyRPC", RpcTarget.AllBuffered);
+
             }
         } else {
             if (collision.tag == "Field" || collision.tag == "OtherPlayer") {
                 rd.gravityScale = 0;
                 rd.velocity = Vector2.zero;
+
+                // 텔레포트인 경우 player의 포지션을 옮기고자 한다. 스킬부분인데 구현하나?
+                // player 변수는 동기화되어있다. 트랜스폼을 옮기면 동기화 가능함. 미사일로 player의 transform을 옮기는것도 이론상 가능하다.
+                
+
                 player.transform.position = this.transform.position;
                 //폭발 후 wind 값 변경
                 WindScript.setWind();
-                Destroy (gameObject);
+                //Destroy (gameObject);
+                PV.RPC("DestroyRPC", RpcTarget.AllBuffered);
+
             }
             if (collision.tag == "Out") {
                 //폭발 후 wind 값 변경
+                //바람도 제각각 이므로 하나의 마스터 Client를 기준으로 동기화 해야함. 
+                //턴이랑 같이 동기화 하면 될것같은데. 
                 WindScript.setWind();
-                Destroy (gameObject);
+                //Destroy (gameObject);
+                PV.RPC("DestroyRPC", RpcTarget.AllBuffered);
                 player.GetComponent<PlayerHP> ().TakeDamage (player.GetComponent<PlayerHP> ().CurrentHP / 2);
             }
         }
     }
+
+
     //projectile의 방향과 각도가 일치하게 update
     //rigidbody를 이용해 이동을 하기 때문에 fixed update를 해야 충돌이 없음
     private void FixedUpdate() {
@@ -153,15 +199,64 @@ public class AssetProjectile : MonoBehaviour
         }
     }
 
+
+    // MonoBehaviour 가 제거될 때 호출됨.
+
     private void OnDestroy() {
-        projectileColor = Color.white;
+
+        // 이 부분을 동기화 하는게 완벽하긴 함. 그런데 턴 방식으로 자기 턴이 아니면 조작이 불가능하게 만들어버리면, 한 턴에 생성되는 미사일은 하나이므로
+        // local에서 변수가 바뀌는지 여부를 알 필요가 없을것으로 예상한다.
+
+        if(PV.IsMine)
+        {
+
+            projectileColor = Color.white;
+            gravityScale = 1.0f;
+            expScale = 1f;
+            firePermission = true;
+
+            // 이부분 PV 체크 해야할수도 있음. 
+            player.GetComponent<TankControll>().SkillLock = false;
+            damage = 30f;
+            teloport = false;
+            exceptField = false;
+
+        }
+    }
+
+
+    //Set Direction -1, 1
+    [PunRPC]
+    void DirRPC(int dir) => this.dir = dir;
+
+    
+    //서버에서 실행하는 포탄 제거 함수 ( 모든 클라이언트에서 포탄이 제거되어야 하므로 )
+    //생성도 마찬가지로 PhotonView.Instantiate 를 사용하여야 한다.
+    //발사 하는건 AssetProjectile이 아니다.
+   /* [PunRPC]
+    void FireRPC(float _power, GameObject attackPos)
+    {
+        Fire(_power, attackPos);
+    }*/
+
+    [PunRPC]
+    void DestroyRPC()
+    {
+        Debug.Log("DestroyPRc");
+        Destroy(gameObject, 0.67f);
+
+
+        /// Destroy 
+     /*   projectileColor = Color.white;
         gravityScale = 1.0f;
         expScale = 1f;
         firePermission = true;
-        player.GetComponent<TankControll> ().SkillLock = false;
+
+        // 이부분 PV 체크 해야할수도 있음. 
+        // 역시 이부분에서 nullReference Exception이 발생 
+        player.GetComponent<TankControll>().SkillLock = false;
         damage = 30f;
         teloport = false;
-        exceptField = false;
+        exceptField = false;*/
     }
-
 }

@@ -28,6 +28,8 @@ public class PlayerScript : MonoBehaviourPunCallbacks , IPunObservable
         if (PV.IsMine)
         {
             TC.TankState();
+
+
         }
         else if ((transform.position - curPos).sqrMagnitude >= 100) transform.position = curPos;
         else transform.position = Vector3.Lerp(transform.position, curPos, Time.deltaTime * 10);

@@ -33,7 +33,10 @@ public class CameraControl : MonoBehaviour
             IsHold = !IsHold;
         }
 
-        //follow bullet
+        //
+        //follow bullet 발사가 된 경우 따라가기. 나중에 턴이 구현되면 구현할것
+        //
+        /*
         if (FocusBullet == true && AssetProjectile.bullet != null)
         {
             targetPos.Set(AssetProjectile.bullet.transform.position.x, AssetProjectile.bullet.transform.position.y, this.transform.position.z);
@@ -50,6 +53,7 @@ public class CameraControl : MonoBehaviour
         {
             FreeCamera();
         }
+        */
     }
 
     void FreeCamera()

@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 7182662119249690736}
   - component: {fileID: -998874639964103935}
   - component: {fileID: -3136026754662862050}
+  - component: {fileID: 8726359581494511288}
   m_Layer: 0
   m_Name: AssetProjectile
-  m_TagString: Untagged
+  m_TagString: AssetProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,8 +120,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cef414fca274b446a2f68487a195ba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rd: {fileID: 0}
-  power: 18.86871
+  rd: {fileID: 1914731628101142937}
+  power: 11.1553
+  PV: {fileID: 8726359581494511288}
   explosionClip: {fileID: 8300000, guid: fd706038486fee041947a774223dc22e, type: 3}
 --- !u!95 &-998874639964103935
 Animator:
@@ -175,3 +177,25 @@ PolygonCollider2D:
       - {x: 0.29600558, y: -0.07513865}
       - {x: 0.31611654, y: 0.002683878}
       - {x: 0.27533275, y: 0.06882807}
+--- !u!114 &8726359581494511288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914731628101142938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
