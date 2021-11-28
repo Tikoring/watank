@@ -53,6 +53,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             PlayerList[i].text = "Empty";
         }
     }
+
+    
     public void Connect()
     {
         Debug.Log("[SYSTEM] : Conntect()");
@@ -136,6 +138,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     void Update()
     {
         SetPlayerList();
+        if (PhotonNetwork.IsConnected && Input.GetKeyDown(KeyCode.Backspace)) PhotonNetwork.Disconnect();
     }
 
     void SetPlayerList()

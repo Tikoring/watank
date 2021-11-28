@@ -28,6 +28,11 @@ public class AssetProjectile : MonoBehaviourPunCallbacks
     //Server
     public PhotonView PV;
     int dir;
+    public GameObject GroundObject;
+
+    public PolygonCollider2D AssetProjectilePolygonCollider;
+   
+
 
     public Color ProjetileColor {
         get {return projectileColor;}
@@ -59,6 +64,8 @@ public class AssetProjectile : MonoBehaviourPunCallbacks
     {
         rd = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        AssetProjectilePolygonCollider = GetComponent<PolygonCollider2D>();
+        GroundObject = GameObject.FindGameObjectWithTag("Field");
     }
     void Start()
     {
@@ -110,6 +117,9 @@ public class AssetProjectile : MonoBehaviourPunCallbacks
 
     }*/
 
+
+    // 여기서 지형파괴 함수를 호출하면 된다.
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (!teloport) {
@@ -128,7 +138,22 @@ public class AssetProjectile : MonoBehaviourPunCallbacks
 
                 // 미사일이 필드에 도착해서 제거 
                 Debug.Log("[System] : Missile hit Field");
+
+                Debug.Log("Make a hole");
+                // 이렇게 해버리면 텔레포트 , ExceptField 체크 못함.
+                collision.GetComponent<Ground>().MakeAHole(AssetProjectilePolygonCollider, this.ExpScale);
+
+                Debug.Log("Remove AssetProjectile");
                 PV.RPC("DestroyRPC", RpcTarget.AllBuffered);
+
+                // 이런식으로 매개변수 넣어주면 안된다.
+                //PV.RPC("setGround", RpcTarget.AllBuffered, AssetProjectilePolygonCollider);
+                
+
+
+
+
+
             }
             if (collision.tag == "OtherPlayer") {   //상대방을 인식
                 rd.gravityScale = 0;
@@ -139,7 +164,7 @@ public class AssetProjectile : MonoBehaviourPunCallbacks
                 
                 apAnimator.SetBool ("Explosion", true);
                 collision.GetComponent<PlayerHP> ().TakeDamage (damage);
-                AudioManager.Instance.PlaySFXSound("ExplosionSound");
+                //AudioManager.Instance.PlaySFXSound("ExplosionSound");
                 //폭발 후 wind 값 변경
                 WindScript.setWind();
                 //Destroy(gameObject, 0.67f);
@@ -168,6 +193,7 @@ public class AssetProjectile : MonoBehaviourPunCallbacks
 
                 player.transform.position = this.transform.position;
                 //폭발 후 wind 값 변경
+                //Wind 값도 동기화 시켜줘야함. 동일하도록
                 WindScript.setWind();
                 //Destroy (gameObject);
                 PV.RPC("DestroyRPC", RpcTarget.AllBuffered);
@@ -240,23 +266,17 @@ public class AssetProjectile : MonoBehaviourPunCallbacks
     }*/
 
     [PunRPC]
+    void setGround(Collider2D collision)
+    {
+        GroundObject.GetComponent<Ground>().OnTriggerEnter2D(collision);
+    }
+
+    [PunRPC]
     void DestroyRPC()
     {
         Debug.Log("DestroyPRc");
         Destroy(gameObject, 0.67f);
 
-
-        /// Destroy 
-     /*   projectileColor = Color.white;
-        gravityScale = 1.0f;
-        expScale = 1f;
-        firePermission = true;
-
-        // 이부분 PV 체크 해야할수도 있음. 
-        // 역시 이부분에서 nullReference Exception이 발생 
-        player.GetComponent<TankControll>().SkillLock = false;
-        damage = 30f;
-        teloport = false;
-        exceptField = false;*/
     }
+
 }

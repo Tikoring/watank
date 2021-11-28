@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -998874639964103935}
   - component: {fileID: -3136026754662862050}
   - component: {fileID: 8726359581494511288}
+  - component: {fileID: -406950875660455776}
   m_Layer: 0
   m_Name: AssetProjectile
   m_TagString: AssetProjectile
@@ -121,8 +122,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rd: {fileID: 1914731628101142937}
-  power: 16.585766
+  power: 10.118046
   PV: {fileID: 8726359581494511288}
+  GroundObject: {fileID: 0}
+  AssetProjectilePolygonCollider: {fileID: 0}
   explosionClip: {fileID: 8300000, guid: fd706038486fee041947a774223dc22e, type: 3}
 --- !u!95 &-998874639964103935
 Animator:
@@ -199,3 +202,19 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-406950875660455776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914731628101142938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters: []
+  m_SynchronizeLayers: []
