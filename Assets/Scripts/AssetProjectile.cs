@@ -121,7 +121,7 @@ public class AssetProjectile : MonoBehaviourPunCallbacks
                 coll = true;
 
                 apAnimator.SetBool ("Explosion", true);;
-                AudioManager.Instance.PlaySFXSound("ExplosionSound");
+                //AudioManager.Instance.PlaySFXSound("ExplosionSound");
                 //폭발 후 wind 값 변경
                 WindScript.setWind();
                 //Destroy(gameObject, 0.67f);         //개선 필요함(animation이 종료될 시에 삭제되게)

@@ -28,6 +28,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     // 초기 인원4 
     public Text[] PlayerList;
 
+    // 동기화된 미사일이 지형파괴, 플레이어에게 데미지 주게 만들기
+    // 카메라 해당 턴 및 미사일에 동기화
+    // 근데 포톤이 맛이 갔어..
+    // 
+
     void Awake()
     {
         Screen.SetResolution(1280, 720, false);
@@ -53,6 +58,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         Debug.Log("[SYSTEM] : Conntect()");
         PhotonNetwork.LocalPlayer.NickName = NickNameInput.text;
         PhotonNetwork.ConnectUsingSettings();
+        
         //LoginSuccess();
     }
 

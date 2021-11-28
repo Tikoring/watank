@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 using Photon.Pun;
 using Photon.Realtime;
 
@@ -10,16 +9,22 @@ using Photon.Realtime;
 public class PlayerScript : MonoBehaviourPunCallbacks , IPunObservable
 {
     public Rigidbody2D RB;
+    
+    // 휠 스프라이트
     public SpriteRenderer SR;
+
+    // 마스터 스프라이트
+    public SpriteRenderer MSR;
     public PhotonView PV;
     public TankControll TC;
+    public Attack ATK;
 
     Vector3 curPos;
     // Start is called before the first frame update
     void Start()
     {
         TC = GetComponent<TankControll>();
-        
+        ATK = GetComponent<Attack>();
     }
 
     // Update is called once per frame
@@ -28,7 +33,7 @@ public class PlayerScript : MonoBehaviourPunCallbacks , IPunObservable
         if (PV.IsMine)
         {
             TC.TankState();
-
+            ATK.AttackState();
 
         }
         else if ((transform.position - curPos).sqrMagnitude >= 100) transform.position = curPos;
@@ -47,5 +52,11 @@ public class PlayerScript : MonoBehaviourPunCallbacks , IPunObservable
 
         }
     }
+
+    // 탱크 좌우 스프라이트 동기화. 그런데 스프라이트 렌더러는 wheel에 있음.
+    // 그거 가져와서 뒤집으면됨.
+
+    //[PunRPC]
+    //void FlipXRPC(float axis) => MSR.flipX = axis == -1;
 
 }

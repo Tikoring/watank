@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rd: {fileID: 1914731628101142937}
-  power: 11.1553
+  power: 16.585766
   PV: {fileID: 8726359581494511288}
   explosionClip: {fileID: 8300000, guid: fd706038486fee041947a774223dc22e, type: 3}
 --- !u!95 &-998874639964103935

@@ -373,9 +373,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RB: {fileID: 6977006319575623111}
-  SR: {fileID: 8628251644806855006}
+  SR: {fileID: 6977006319801692168}
+  MSR: {fileID: 8628251644806855006}
   PV: {fileID: 1163277815662403132}
   TC: {fileID: 6977006319575623110}
+  ATK: {fileID: 0}
 --- !u!114 &1163277815662403132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,6 +399,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: -8101324502241685601}
   - {fileID: 9135091178389352215}
+  - {fileID: 5218306914252112975}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -428,6 +431,7 @@ GameObject:
   - component: {fileID: 6977006319801692168}
   - component: {fileID: 2033364355659589784}
   - component: {fileID: 3432076459247702241}
+  - component: {fileID: 5218306914252112975}
   m_Layer: 0
   m_Name: Wheel
   m_TagString: Untagged
@@ -535,6 +539,27 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5218306914252112975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6977006319801692169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 4
+    SynchronizeType: 0
+    Name: isMoving
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
 --- !u!1 &6977006319992121092
 GameObject:
   m_ObjectHideFlags: 0

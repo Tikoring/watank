@@ -58,21 +58,24 @@ public class Attack : MonoBehaviourPunCallbacks
         cam = GameObject.FindObjectOfType<CameraControl>();
     }
     
-    
+
+    public void AttackState()
+    {
+        if (firePermission)
+        {
+            CheckInput();
+        }
+        UpdatePowerBar();
+        firePermission = projectilePrefab.FirePermission;   //포탄이 파괴 됐을 때 값의 변경을 위해 Update에서 계속 초기화
+
+    }
+
     void Update()
     {
 
-        if(PlayerGameObject.GetComponent<PlayerScript>().PV.IsMine)
-        {
+        
 
-            if (firePermission)
-            {
-                CheckInput();
-            }
-            UpdatePowerBar();
-            firePermission = projectilePrefab.FirePermission;   //포탄이 파괴 됐을 때 값의 변경을 위해 Update에서 계속 초기화
-
-        }
+        
         //포탄이 사라진 경우, 카메라 포커스를 바꾸는것으로 보임. 
         //if (AssetProjectile.bullet == null)
         //  cam.FocusBullet = false;
