@@ -150,11 +150,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             {
                 PlayerList[0].text = playerJoinID.GetComponent<PlayerJoin>().playerName;
             }
-            else if (playerJoinID.GetPhotonView().ViewID == 2001)
+            else if (playerJoinID.GetPhotonView().ViewID == 3001)
             {
                 PlayerList[1].text = playerJoinID.GetComponent<PlayerJoin>().playerName;
             }
-            else if (playerJoinID.GetPhotonView().ViewID == 3001)
+            else if (playerJoinID.GetPhotonView().ViewID == 2001)
             {
                 PlayerList[2].text = playerJoinID.GetComponent<PlayerJoin>().playerName;
             }
