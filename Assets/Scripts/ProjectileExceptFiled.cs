@@ -9,19 +9,21 @@ public class ProjectileExceptFiled : Skill
     // Start is called before the first frame update
     void Start()
     {
-        foreach(GameObject Go in GameObject.FindGameObjectsWithTag("Player"))
-        {
-            if(Go.GetComponent<PlayerScript>().PV.IsMine)
-            {
-                assetProjectile = Go.GetComponent<Attack>().ProjectilePrefab;
 
-            }
-            else
-            {
-                assetProjectile = null;
-                Debug.Log("Error. Can't find assetProjectile");
-            }
-        }
+        //foreach(GameObject Go in GameObject.FindGameObjectsWithTag("Player"))
+        //{
+        //    if(Go.GetComponent<PlayerScript>().PV.IsMine)
+        //    {
+        //        assetProjectile = Go.GetComponent<Attack>().ProjectilePrefab;
+
+        //    }
+        //    else
+        //    {
+        //        assetProjectile = null;
+        //        Debug.Log("Error. Can't find assetProjectile");
+        //    }
+        //}
+        
         active = false;
     }
 

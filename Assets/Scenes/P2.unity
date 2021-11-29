@@ -1006,6 +1006,10 @@ PrefabInstance:
       value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 7628558199005191866, guid: aef07a1e0595e8c49834f1d0be7a7ac9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7628558199005191866, guid: aef07a1e0595e8c49834f1d0be7a7ac9, type: 3}
       propertyPath: m_TagString
       value: RemainTimeCount
       objectReference: {fileID: 0}

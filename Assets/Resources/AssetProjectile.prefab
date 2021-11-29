@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rd: {fileID: 1914731628101142937}
-  power: 12.071644
+  power: 7.997831
   PV: {fileID: 8726359581494511288}
   GroundObject: {fileID: 0}
   AssetProjectilePolygonCollider: {fileID: 0}

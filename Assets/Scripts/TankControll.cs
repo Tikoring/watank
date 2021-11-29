@@ -36,14 +36,14 @@ public class TankControll : MonoBehaviour
     void Awake()
     {
         moveBar = GameObject.FindGameObjectWithTag("MoveGauge").GetComponent<Slider>();
-        remainTimeText = GameObject.FindGameObjectWithTag("RemainTimeCount").GetComponent<Text>();
+        //remainTimeText = GameObject.FindGameObjectWithTag("RemainTimeCount").GetComponent<Text>();
 
     }
     private void UpdateUI()
     {
         // 4: default power, 16: max power - default power
         moveBar.value = (maxMoveDuration - moveDuration)/ maxMoveDuration;
-        remainTimeText.text = ((int)remainTime).ToString();
+        //remainTimeText.text = ((int)remainTime).ToString();
     }
 
     public void Start()
@@ -87,8 +87,8 @@ public class TankControll : MonoBehaviour
                     move2D.MoveX();
                     //if (AudioManager.go == null)
                     //    AudioManager.Instance.PlaySFXSound("TankMoveAudio");
-                    tankAnimator.AddMoveEffect();
-                    tankAnimator.isMove(true);   //좌, 우 입력이 있다면 move로 이동
+                    //tankAnimator.AddMoveEffect();
+                    //tankAnimator.isMove(true);   //좌, 우 입력이 있다면 move로 이동
                 }
             }
             if (Input.GetKey(KeyCode.RightArrow))
@@ -103,8 +103,8 @@ public class TankControll : MonoBehaviour
                     move2D.MoveX();
                    // if (AudioManager.go == null)
                         //AudioManager.Instance.PlaySFXSound("TankMoveAudio");
-                    tankAnimator.AddMoveEffect();
-                    tankAnimator.isMove(true);   //좌, 우 입력이 있다면 move로 이동
+                    //tankAnimator.AddMoveEffect();
+                    //tankAnimator.isMove(true);   //좌, 우 입력이 있다면 move로 이동
                 }
             }
 
@@ -117,8 +117,8 @@ public class TankControll : MonoBehaviour
         //좌-우 입력이 없다면 idle로 이동
         if (!(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow)))
         {
-            tankAnimator.isMove(false);
-            tankAnimator.DeleteMoveEffect();
+            //tankAnimator.isMove(false);
+            //tankAnimator.DeleteMoveEffect();
         }
 
         if (Input.GetKey(KeyCode.UpArrow))

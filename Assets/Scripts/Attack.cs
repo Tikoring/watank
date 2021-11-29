@@ -79,18 +79,7 @@ public class Attack : MonoBehaviourPunCallbacks
 
     void Update()
     {
-
-        
-
-        
-        //포탄이 사라진 경우, 카메라 포커스를 바꾸는것으로 보임. 
-        //if (AssetProjectile.bullet == null)
-        //  cam.FocusBullet = false;
-
-        // 하는김에 카메라 로직도 대충 짜놓고 가자. 
-        // 미사일이 존재하는지 여부가 아니라, 미사일이 파괴되었는지 여부, 턴이 끝났는지 여부로 카메라 전환을 하면 된다.
-        // 턴 시작 -> 발사 -> 턴 종료
-        // 턴 종료를 기준으로 하면 될듯 
+       
 
     }
     public void Fire(float _power, GameObject attackPos)

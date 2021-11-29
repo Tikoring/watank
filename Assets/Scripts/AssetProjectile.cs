@@ -5,7 +5,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class AssetProjectile : MonoBehaviourPunCallbacks
+public class AssetProjectile : MonoBehaviourPunCallbacks , IPunObservable
 {
     [SerializeField]
     private Rigidbody2D rd;
@@ -302,4 +302,16 @@ public class AssetProjectile : MonoBehaviourPunCallbacks
 
     }
 
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(transform.position);
+        }
+        else
+        {
+            stream.ReceiveNext();
+
+        }
+    }
 }
