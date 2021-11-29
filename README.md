@@ -23,7 +23,7 @@ cleint 완성본
 
 * 현재 P0단계는 script 수정으로 인해 작동하지 않음
 
-#### P2
+#### P2 
 > 1. AssetTest
 > * Tank 및 Projectile에 Asset 및 애니메이션 적용
 > 2. SoundTest
