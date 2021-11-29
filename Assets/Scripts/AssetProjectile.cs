@@ -175,7 +175,9 @@ public class AssetProjectile : MonoBehaviourPunCallbacks , IPunObservable
                 //PV.RPC("setGround", RpcTarget.AllBuffered, AssetProjectilePolygonCollider);
         
             }
-            if (collision.tag == "OtherPlayer") {   //상대방을 인식
+            
+            //플레이어 히트시 느린쪽에 맞춰서 판정 
+            if (!PV.IsMine && collision.tag == "Player" && collision.GetComponent<PhotonView>().IsMine) {   //상대방을 인식
                 rd.gravityScale = 0;
                 rd.velocity = Vector2.zero;
                 this.transform.localScale = new Vector3 (4.5f, 4.5f, 4.5f) * expScale;

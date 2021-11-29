@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -3136026754662862050}
   - component: {fileID: 8726359581494511288}
   - component: {fileID: -406950875660455776}
+  - component: {fileID: 692125642583534905}
   m_Layer: 0
   m_Name: AssetProjectile
   m_TagString: AssetProjectile
@@ -122,7 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rd: {fileID: 1914731628101142937}
-  power: 7.997831
+  power: 19.800278
   PV: {fileID: 8726359581494511288}
   GroundObject: {fileID: 0}
   AssetProjectilePolygonCollider: {fileID: 0}
@@ -200,7 +201,9 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
+  - {fileID: 7182662119249690736}
   - {fileID: -406950875660455776}
+  - {fileID: 692125642583534905}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -225,3 +228,19 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
+--- !u!114 &692125642583534905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914731628101142938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e7cb724808c322458aa4d15f5035fa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 0
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
