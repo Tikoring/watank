@@ -59,4 +59,7 @@ public class PlayerScript : MonoBehaviourPunCallbacks , IPunObservable
     //[PunRPC]
     //void FlipXRPC(float axis) => MSR.flipX = axis == -1;
 
+    // 자손 Animation 은 동기화 불가능. 제시된 방식(Animator와 PhotonView가 같은 위치)으로만
+    // 동기화 가능함.
+
 }

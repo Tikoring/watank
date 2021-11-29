@@ -242,7 +242,7 @@ public class AssetProjectile : MonoBehaviourPunCallbacks
             firePermission = true;
 
             // 이부분 PV 체크 해야할수도 있음. 
-            player.GetComponent<TankControll>().SkillLock = false;
+            //player.GetComponent<TankControll>().SkillLock = false;
             damage = 30f;
             teloport = false;
             exceptField = false;
@@ -265,12 +265,14 @@ public class AssetProjectile : MonoBehaviourPunCallbacks
         Fire(_power, attackPos);
     }*/
 
-    [PunRPC]
+
+    // 매개변수로 collision 사용 하면 안됨 
+    /*[PunRPC]
     void setGround(Collider2D collision)
     {
         GroundObject.GetComponent<Ground>().OnTriggerEnter2D(collision);
     }
-
+*/
     [PunRPC]
     void DestroyRPC()
     {
