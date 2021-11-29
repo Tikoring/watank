@@ -20,7 +20,8 @@ cleint 완성본
 > *Bullet의 발사와 탄도학 적용을 확인
 > 4. PO
 > *1, 2, 3번 통합 Scene
-*현재 P0단계는 script 수정으로 인해 작동하지 않음
+
+* 현재 P0단계는 script 수정으로 인해 작동하지 않음
 
 #### P2
 > 1. AssetTest
@@ -37,4 +38,5 @@ cleint 완성본
 > *Bgm 및 SE 볼륨 조절 추가 Scene
 > 7. P2
 > *1~6번 통합 Scene
-*현재 P2단계는 Script 수정으로P2, MenuFixScene, UITest, mapTest만 작동
+
+* 현재 P2단계는 Script 수정으로P2, MenuFixScene, UITest, mapTest만 작동
