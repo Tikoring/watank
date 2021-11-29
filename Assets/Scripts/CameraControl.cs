@@ -10,8 +10,13 @@ public class CameraControl : MonoBehaviour
     private Vector3 targetPos;
     //private float distance = 0;
     public bool FocusBullet = false;
+    
     // GameObject tank;
-    GameObject defaultPositionGO;
+    public GameObject defaultPositionGO;
+
+    public GameObject assetProjectile;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,12 +25,30 @@ public class CameraControl : MonoBehaviour
         //tank = GameObject.Find("AssetTank");
         defaultPositionGO = GameObject.Find("defaultCameraPos");
         //AudioManager.Instance.PlayBGMSound();
+        assetProjectile = null;
 
+    }
+
+    public void setCameraToMe()
+    {
+        foreach(GameObject Go in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            if(Go.GetComponent<PlayerScript>().PV.IsMine)
+            {
+                Debug.Log("Set camera to player");
+                defaultPositionGO = Go;
+            }
+            else
+            {
+                Debug.Log("Failt to set defaultCemera");
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        setCameraToMe();
         Zoom();
  
         if (Input.GetKeyUp("y"))
@@ -36,10 +59,10 @@ public class CameraControl : MonoBehaviour
         //
         //follow bullet 발사가 된 경우 따라가기. 나중에 턴이 구현되면 구현할것
         //
-        /*
-        if (FocusBullet == true && AssetProjectile.bullet != null)
+
+        if (FocusBullet == true && assetProjectile != null)
         {
-            targetPos.Set(AssetProjectile.bullet.transform.position.x, AssetProjectile.bullet.transform.position.y, this.transform.position.z);
+            targetPos.Set(assetProjectile.transform.position.x, assetProjectile.transform.position.y, this.transform.position.z);
             FocusCamera(targetPos);
         }
         //follow tank
@@ -53,7 +76,7 @@ public class CameraControl : MonoBehaviour
         {
             FreeCamera();
         }
-        */
+
     }
 
     void FreeCamera()

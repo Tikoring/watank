@@ -286,7 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c548e4f5b807e8540bff1215ab42b44b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 200
+  maxHP: 136.92
   hpBar: {fileID: 0}
   headHpBar: {fileID: 3589374924578940883}
 --- !u!114 &7910386276734658130
@@ -305,6 +305,7 @@ MonoBehaviour:
   attackPos: {fileID: 6977006319992121092}
   powerBar: {fileID: 3589374924578940883}
   PlayerGameObject: {fileID: 0}
+  CameraObject: {fileID: 0}
 --- !u!114 &8376299383118278134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -802,6 +803,10 @@ PrefabInstance:
     - target: {fileID: 3589374926184080832, guid: 485e590be52368b40bb214fa22edd655, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3589374926184080833, guid: 485e590be52368b40bb214fa22edd655, type: 3}
+      propertyPath: m_Value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3589374926184080835, guid: 485e590be52368b40bb214fa22edd655, type: 3}
       propertyPath: m_Name

@@ -31,7 +31,8 @@ public class AssetProjectile : MonoBehaviourPunCallbacks
     public GameObject GroundObject;
 
     public PolygonCollider2D AssetProjectilePolygonCollider;
-   
+
+    public GameObject CameraControlObject;
 
 
     public Color ProjetileColor {
@@ -66,6 +67,8 @@ public class AssetProjectile : MonoBehaviourPunCallbacks
         sr = GetComponent<SpriteRenderer>();
         AssetProjectilePolygonCollider = GetComponent<PolygonCollider2D>();
         GroundObject = GameObject.FindGameObjectWithTag("Field");
+        CameraControlObject = GameObject.FindGameObjectWithTag("MainCamera");
+
     }
     void Start()
     {
@@ -77,12 +80,35 @@ public class AssetProjectile : MonoBehaviourPunCallbacks
         //Destroy(gameObject, 15);
         //PV.RPC("DestroyRPC", RpcTarget.AllBuffered);
 
+        CameraControlObject.GetComponent<CameraControl>().assetProjectile
+            = this.gameObject;
+
 
         firePermission = false;
         beforeY = transform.position.y;
         apAnimator = GetComponent<Animator> ();
 
-        foreach(GameObject Go in GameObject.FindGameObjectsWithTag("Player"))
+        /*foreach(GameObject Go in GameObject.FindGameObjectsWithTag("Player"))
+        {
+
+            if (Go.GetComponent<PlayerScript>().PV.IsMine)
+            {
+                player = Go;
+
+            }
+            else
+            {
+                player = null;
+                Debug.Log("Error! AssetProjectile can't find player object");
+            }
+
+        }*/
+        coll = false;
+    }
+
+    public void setPlayer()
+    {
+        foreach (GameObject Go in GameObject.FindGameObjectsWithTag("Player"))
         {
 
             if (Go.GetComponent<PlayerScript>().PV.IsMine)
@@ -97,7 +123,6 @@ public class AssetProjectile : MonoBehaviourPunCallbacks
             }
 
         }
-        coll = false;
     }
 
     //skill은 한번에 하나씩 발동되기 때문에, color값을 인자로 받는 fire가 기본, 받지 않는 fire가 다른 스킬을 사용할 때 사용
@@ -105,17 +130,17 @@ public class AssetProjectile : MonoBehaviourPunCallbacks
     // 미사일을 발사하는 함수가 미사일 내부에 존재하는게 문제인것.
 
     // 이 부분을 Attack 으로 옮겨봄.
- /*   public void Fire (float _power, GameObject attackPos) {
-        AssetProjectile instance = this;
-        //print("Fire");
-        instance.power = _power;
-        Vector3 pos = attackPos.transform.rotation * Vector3.right / 3;
+    /*   public void Fire (float _power, GameObject attackPos) {
+           AssetProjectile instance = this;
+           //print("Fire");
+           instance.power = _power;
+           Vector3 pos = attackPos.transform.rotation * Vector3.right / 3;
 
-        // 이 부분이 불렛 할당 부분 
-        //bullet = Instantiate(instance, attackPos.transform.position + pos, attackPos.transform.rotation);
-        PhotonNetwork.Instantiate("AssetProjectile", attackPos.transform.position + pos, attackPos.transform.rotation);
+           // 이 부분이 불렛 할당 부분 
+           //bullet = Instantiate(instance, attackPos.transform.position + pos, attackPos.transform.rotation);
+           PhotonNetwork.Instantiate("AssetProjectile", attackPos.transform.position + pos, attackPos.transform.rotation);
 
-    }*/
+       }*/
 
 
     // 여기서 지형파괴 함수를 호출하면 된다.
@@ -133,7 +158,7 @@ public class AssetProjectile : MonoBehaviourPunCallbacks
                 apAnimator.SetBool ("Explosion", true);;
                 //AudioManager.Instance.PlaySFXSound("ExplosionSound");
                 //폭발 후 wind 값 변경
-                WindScript.setWind();
+                //WindScript.setWind();
                 //Destroy(gameObject, 0.67f);         //개선 필요함(animation이 종료될 시에 삭제되게)
 
                 // 미사일이 필드에 도착해서 제거 
@@ -148,12 +173,7 @@ public class AssetProjectile : MonoBehaviourPunCallbacks
 
                 // 이런식으로 매개변수 넣어주면 안된다.
                 //PV.RPC("setGround", RpcTarget.AllBuffered, AssetProjectilePolygonCollider);
-                
-
-
-
-
-
+        
             }
             if (collision.tag == "OtherPlayer") {   //상대방을 인식
                 rd.gravityScale = 0;
@@ -166,7 +186,7 @@ public class AssetProjectile : MonoBehaviourPunCallbacks
                 collision.GetComponent<PlayerHP> ().TakeDamage (damage);
                 //AudioManager.Instance.PlaySFXSound("ExplosionSound");
                 //폭발 후 wind 값 변경
-                WindScript.setWind();
+                //WindScript.setWind();
                 //Destroy(gameObject, 0.67f);
 
                 //미사일이 타겟에 맞아서 제거 
@@ -175,7 +195,7 @@ public class AssetProjectile : MonoBehaviourPunCallbacks
             }
             if (collision.tag == "Out") {
                 //폭발 후 wind 값 변경
-                WindScript.setWind();
+                //WindScript.setWind();
 
                 //미사일이 밖으로 나가서 제거
                 Debug.Log("[System] : Missile Out");
@@ -194,7 +214,7 @@ public class AssetProjectile : MonoBehaviourPunCallbacks
                 player.transform.position = this.transform.position;
                 //폭발 후 wind 값 변경
                 //Wind 값도 동기화 시켜줘야함. 동일하도록
-                WindScript.setWind();
+                //WindScript.setWind();
                 //Destroy (gameObject);
                 PV.RPC("DestroyRPC", RpcTarget.AllBuffered);
 
@@ -203,7 +223,7 @@ public class AssetProjectile : MonoBehaviourPunCallbacks
                 //폭발 후 wind 값 변경
                 //바람도 제각각 이므로 하나의 마스터 Client를 기준으로 동기화 해야함. 
                 //턴이랑 같이 동기화 하면 될것같은데. 
-                WindScript.setWind();
+                //WindScript.setWind();
                 //Destroy (gameObject);
                 PV.RPC("DestroyRPC", RpcTarget.AllBuffered);
                 player.GetComponent<PlayerHP> ().TakeDamage (player.GetComponent<PlayerHP> ().CurrentHP / 2);
@@ -215,13 +235,14 @@ public class AssetProjectile : MonoBehaviourPunCallbacks
     //projectile의 방향과 각도가 일치하게 update
     //rigidbody를 이용해 이동을 하기 때문에 fixed update를 해야 충돌이 없음
     private void FixedUpdate() {
+        setPlayer();
         float afterY = transform.position.y;
         float angle = Vector2.Angle (Vector2.right, rd.velocity);
         if (afterY < beforeY) {angle *= -1;}
         beforeY = afterY;
         if (!coll) {
             transform.eulerAngles = new Vector3 (0, 0, angle);
-            rd.velocity += WindScript.getWind();
+            //rd.velocity += WindScript.getWind();
         }
     }
 

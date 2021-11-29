@@ -122,10 +122,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rd: {fileID: 1914731628101142937}
-  power: 14.694834
+  power: 12.071644
   PV: {fileID: 8726359581494511288}
   GroundObject: {fileID: 0}
   AssetProjectilePolygonCollider: {fileID: 0}
+  CameraControlObject: {fileID: 0}
   explosionClip: {fileID: 8300000, guid: fd706038486fee041947a774223dc22e, type: 3}
 --- !u!95 &-998874639964103935
 Animator:
@@ -198,7 +199,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: -406950875660455776}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -216,5 +218,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
-  m_SynchronizeParameters: []
-  m_SynchronizeLayers: []
+  m_SynchronizeParameters:
+  - Type: 4
+    SynchronizeType: 0
+    Name: Explosion
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0

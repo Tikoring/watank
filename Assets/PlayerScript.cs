@@ -19,6 +19,7 @@ public class PlayerScript : MonoBehaviourPunCallbacks , IPunObservable
     public TankControll TC;
     public Attack ATK;
 
+
     Vector3 curPos;
     // Start is called before the first frame update
     void Start()

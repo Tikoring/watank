@@ -871,27 +871,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2080653151694509198, guid: aef07a1e0595e8c49834f1d0be7a7ac9, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2080653151694509198, guid: aef07a1e0595e8c49834f1d0be7a7ac9, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2080653151694509198, guid: aef07a1e0595e8c49834f1d0be7a7ac9, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2546003732496928823, guid: aef07a1e0595e8c49834f1d0be7a7ac9, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2546003732496928823, guid: aef07a1e0595e8c49834f1d0be7a7ac9, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2546003732496928823, guid: aef07a1e0595e8c49834f1d0be7a7ac9, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4609703282446346817, guid: aef07a1e0595e8c49834f1d0be7a7ac9, type: 3}
       propertyPath: m_TagString
@@ -1175,7 +1175,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8596953649044354912, guid: aef07a1e0595e8c49834f1d0be7a7ac9, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aef07a1e0595e8c49834f1d0be7a7ac9, type: 3}
@@ -2147,7 +2147,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camera
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1355058172, guid: 2364dc1f859628349b5a07d7cb9e24d5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2364dc1f859628349b5a07d7cb9e24d5, type: 3}
 --- !u!1 &1385849853
 GameObject:

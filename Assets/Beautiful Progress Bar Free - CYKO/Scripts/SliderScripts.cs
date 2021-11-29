@@ -18,6 +18,6 @@ public class SliderScripts : MonoBehaviour
     public void FillSlider()
     {
         fill.fillAmount = slider.value;
-        Debug.Log(fill.fillAmount);
+        //Debug.Log(fill.fillAmount);
     }
 }

@@ -21,6 +21,10 @@ public class Attack : MonoBehaviourPunCallbacks
     private float power;
     private bool twice;
     public GameObject PlayerGameObject;
+
+
+    public GameObject CameraObject;
+
     public bool Twice {
         get {return twice;}
         set {twice = value;}
@@ -53,11 +57,14 @@ public class Attack : MonoBehaviourPunCallbacks
         powerBar = GameObject.FindGameObjectWithTag("PowerBar").GetComponent<Slider>();
         charging = false;
         power = 4f;
-        firePermission = projectilePrefab.FirePermission;
+        //firePermission = projectilePrefab.FirePermission;
+        firePermission = true;
         twice = false;
         cam = GameObject.FindObjectOfType<CameraControl>();
+        CameraObject = GameObject.FindGameObjectWithTag("MainCamera");
+
     }
-    
+
 
     public void AttackState()
     {
@@ -66,7 +73,7 @@ public class Attack : MonoBehaviourPunCallbacks
             CheckInput();
         }
         UpdatePowerBar();
-        firePermission = projectilePrefab.FirePermission;   //포탄이 파괴 됐을 때 값의 변경을 위해 Update에서 계속 초기화
+        firePermission = true;   //포탄이 파괴 됐을 때 값의 변경을 위해 Update에서 계속 초기화
 
     }
 
@@ -151,8 +158,9 @@ public class Attack : MonoBehaviourPunCallbacks
                 this.Fire(power * 1.5f, attackPos);
 
                 //projectilePrefab.PV.RPC("FireRPC", RpcTarget.AllBuffered, power * 1.5f, attackPos);
-                
-                firePermission = projectilePrefab.FirePermission;
+
+                //firePermission = projectilePrefab.FirePermission;
+                firePermission = true;
 
 
                 //Audio.instance.PlaySound("Attack", attackClip);
@@ -191,7 +199,9 @@ public class Attack : MonoBehaviourPunCallbacks
         //AudioManager.Instance.PlaySFXSound("BulletSound");
         yield return new WaitForSeconds (1f);
         this.Fire(power * 1.5f, attackPos);
-        firePermission = projectilePrefab.FirePermission;
+        //firePermission = projectilePrefab.FirePermission;
+        firePermission = true;
+
         //AudioManager.Instance.PlaySFXSound("BulletSound");
         // Singletone 이므로
         // 두번 쏘는걸 구현할때 오디오 매니저를 두번 생성하면 안된다.
