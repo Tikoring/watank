@@ -35,6 +35,7 @@ public class AssetProjectile : MonoBehaviourPunCallbacks , IPunObservable
     public GameObject CameraControlObject;
 
 
+
     public Color ProjetileColor {
         get {return projectileColor;}
         set {projectileColor = value;}
@@ -106,7 +107,7 @@ public class AssetProjectile : MonoBehaviourPunCallbacks , IPunObservable
         coll = false;
     }
 
-    public void setPlayer()
+    /*public void setPlayer()
     {
         foreach (GameObject Go in GameObject.FindGameObjectsWithTag("Player"))
         {
@@ -124,7 +125,7 @@ public class AssetProjectile : MonoBehaviourPunCallbacks , IPunObservable
 
         }
     }
-
+*/
     //skill은 한번에 하나씩 발동되기 때문에, color값을 인자로 받는 fire가 기본, 받지 않는 fire가 다른 스킬을 사용할 때 사용
     //이게 헷갈렸던 원인이다. 미사일을 제어하는 함수는 Attack 에 있어야하는데,
     // 미사일을 발사하는 함수가 미사일 내부에 존재하는게 문제인것.
@@ -147,8 +148,14 @@ public class AssetProjectile : MonoBehaviourPunCallbacks , IPunObservable
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!teloport) {
-            if (collision.tag == "Field" && !exceptField) {
+        
+            if (collision.tag =="Player")
+             {
+                 Debug.Log("initialPlayer");
+             }
+        
+
+            else if (collision.tag == "Field" && !exceptField) {
                 rd.gravityScale = 0;
                 rd.velocity = Vector2.zero;
                 this.transform.localScale = new Vector3 (4.5f, 4.5f, 4.5f) * expScale;
@@ -156,12 +163,7 @@ public class AssetProjectile : MonoBehaviourPunCallbacks , IPunObservable
                 coll = true;
 
                 apAnimator.SetBool ("Explosion", true);;
-                //AudioManager.Instance.PlaySFXSound("ExplosionSound");
-                //폭발 후 wind 값 변경
-                //WindScript.setWind();
-                //Destroy(gameObject, 0.67f);         //개선 필요함(animation이 종료될 시에 삭제되게)
-
-                // 미사일이 필드에 도착해서 제거 
+              
                 Debug.Log("[System] : Missile hit Field");
 
                 Debug.Log("Make a hole");
@@ -171,14 +173,9 @@ public class AssetProjectile : MonoBehaviourPunCallbacks , IPunObservable
                 Debug.Log("Remove AssetProjectile");
                 PV.RPC("DestroyRPC", RpcTarget.AllBuffered);
 
-                // 이런식으로 매개변수 넣어주면 안된다.
-                //PV.RPC("setGround", RpcTarget.AllBuffered, AssetProjectilePolygonCollider);
-        
             }
-
-            //플레이어 히트시 느린쪽에 맞춰서 판정 
-            //!PV.IsMine && 
-            if (collision.tag == "Player" && collision.GetComponent<PhotonView>().IsMine) {   //상대방을 인식
+            else if (collision.tag =="Player" && !(collision.GetComponent<PhotonView>().IsMine)) 
+            {   //상대방을 인식
                 Debug.Log("Hit Player!!");
                 rd.gravityScale = 0;
                 rd.velocity = Vector2.zero;
@@ -198,7 +195,7 @@ public class AssetProjectile : MonoBehaviourPunCallbacks , IPunObservable
                 Debug.Log("[System] : Missile hit player");
                 PV.RPC("DestroyRPC", RpcTarget.AllBuffered);
             }
-            if (collision.tag == "Out") {
+            else if (collision.tag == "Out") {
                 //폭발 후 wind 값 변경
                 //WindScript.setWind();
 
@@ -207,40 +204,19 @@ public class AssetProjectile : MonoBehaviourPunCallbacks , IPunObservable
                 PV.RPC("DestroyRPC", RpcTarget.AllBuffered);
 
             }
-        } else {
-            if (collision.tag == "Field" || collision.tag == "OtherPlayer") {
-                rd.gravityScale = 0;
-                rd.velocity = Vector2.zero;
-
-                // 텔레포트인 경우 player의 포지션을 옮기고자 한다. 스킬부분인데 구현하나?
-                // player 변수는 동기화되어있다. 트랜스폼을 옮기면 동기화 가능함. 미사일로 player의 transform을 옮기는것도 이론상 가능하다.
-                
-
-                player.transform.position = this.transform.position;
-                //폭발 후 wind 값 변경
-                //Wind 값도 동기화 시켜줘야함. 동일하도록
-                //WindScript.setWind();
-                //Destroy (gameObject);
-                PV.RPC("DestroyRPC", RpcTarget.AllBuffered);
+            else
+            {
 
             }
-            if (collision.tag == "Out") {
-                //폭발 후 wind 값 변경
-                //바람도 제각각 이므로 하나의 마스터 Client를 기준으로 동기화 해야함. 
-                //턴이랑 같이 동기화 하면 될것같은데. 
-                //WindScript.setWind();
-                //Destroy (gameObject);
-                PV.RPC("DestroyRPC", RpcTarget.AllBuffered);
-                player.GetComponent<PlayerHP> ().TakeDamage (player.GetComponent<PlayerHP> ().CurrentHP / 2);
-            }
-        }
+        
+        
     }
 
 
     //projectile의 방향과 각도가 일치하게 update
     //rigidbody를 이용해 이동을 하기 때문에 fixed update를 해야 충돌이 없음
     private void FixedUpdate() {
-        setPlayer();
+        //setPlayer();
         float afterY = transform.position.y;
         float angle = Vector2.Angle (Vector2.right, rd.velocity);
         if (afterY < beforeY) {angle *= -1;}

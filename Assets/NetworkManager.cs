@@ -79,7 +79,34 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         Vector3 rPos = new Vector3(Random.Range(-40f, 40f),30f,0);
         PhotonNetwork.Instantiate("PlayerJoin", Vector3.zero, Quaternion.identity);
-        PhotonNetwork.Instantiate("AssetTank", rPos , Quaternion.identity);
+
+        //PhotonNetwork.Instantiate("AssetTank", rPos , Quaternion.identity);
+
+        Vector3 pos1 = new Vector3(-22f, 10f, 0);
+        Vector3 pos2 = new Vector3(25f, 10f, 0);
+
+
+        foreach (GameObject playerJoinID in GameObject.FindGameObjectsWithTag("PlayerJoinID"))
+        {
+            // ViewId 에 따라서 플레이어를 구분하고 Lobby 위치를 달리 한다. 
+            if (playerJoinID.GetPhotonView().ViewID == 1001)
+            {
+                PhotonNetwork.Instantiate("AssetTank", pos1, Quaternion.identity);
+            }
+            else if (playerJoinID.GetPhotonView().ViewID == 3001)
+            {
+                PlayerList[1].text = playerJoinID.GetComponent<PlayerJoin>().playerName;
+            }
+            else if (playerJoinID.GetPhotonView().ViewID == 2001)
+            {
+                PhotonNetwork.Instantiate("AssetTank", pos2, Quaternion.identity);
+            }
+            else if (playerJoinID.GetPhotonView().ViewID == 4001)
+            {
+                PlayerList[3].text = playerJoinID.GetComponent<PlayerJoin>().playerName;
+            }
+        }
+
 
     }
 
