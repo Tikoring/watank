@@ -12,7 +12,7 @@ public class PlayerHP : MonoBehaviour
     // private Text HPtext;
     private Slider hpBar;     // Hp bar
     [SerializeField]
-    private Slider headHpBar;
+    public Slider headHpBar;
     private float currentHP;
     private SpriteRenderer spriteRenderer;
 
@@ -50,6 +50,22 @@ public class PlayerHP : MonoBehaviour
         Debug.Log ("Hit");
         if (currentHP <= 0) {
             Debug.Log ("Player HP : 0.. Die");
+           // gameObject.SetActive(false);
+            
+            
+        }
+    }
+
+    public bool Die()
+    {
+        if(currentHP <= 0)
+        {
+            Debug.Log("Die");
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 

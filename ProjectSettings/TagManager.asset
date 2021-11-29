@@ -17,6 +17,8 @@ TagManager:
   - InGameUITag
   - Projectile
   - AssetProjectile
+  - NetworkManager
+  - PlayerHeadHp
   layers:
   - Default
   - TransparentFX

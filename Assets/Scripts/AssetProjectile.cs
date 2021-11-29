@@ -175,9 +175,11 @@ public class AssetProjectile : MonoBehaviourPunCallbacks , IPunObservable
                 //PV.RPC("setGround", RpcTarget.AllBuffered, AssetProjectilePolygonCollider);
         
             }
-            
+
             //플레이어 히트시 느린쪽에 맞춰서 판정 
-            if (!PV.IsMine && collision.tag == "Player" && collision.GetComponent<PhotonView>().IsMine) {   //상대방을 인식
+            //!PV.IsMine && 
+            if (collision.tag == "Player" && collision.GetComponent<PhotonView>().IsMine) {   //상대방을 인식
+                Debug.Log("Hit Player!!");
                 rd.gravityScale = 0;
                 rd.velocity = Vector2.zero;
                 this.transform.localScale = new Vector3 (4.5f, 4.5f, 4.5f) * expScale;
@@ -185,7 +187,8 @@ public class AssetProjectile : MonoBehaviourPunCallbacks , IPunObservable
                 coll = true;
                 
                 apAnimator.SetBool ("Explosion", true);
-                collision.GetComponent<PlayerHP> ().TakeDamage (damage);
+                //collision.GetComponent<PlayerScript> ().TakeDamage (damage);
+                collision.GetComponent<PlayerScript>().playerHPScript.TakeDamage (damage);
                 //AudioManager.Instance.PlaySFXSound("ExplosionSound");
                 //폭발 후 wind 값 변경
                 //WindScript.setWind();

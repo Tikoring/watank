@@ -88,12 +88,13 @@ public class Attack : MonoBehaviourPunCallbacks
         //print("Fire");
         instance.power = _power;
         Vector3 pos = attackPos.transform.rotation * Vector3.right / 3;
+        Vector3 addPosition = new Vector3(0, 3.0f, 0);
 
         // 이 부분이 불렛 할당 부분
         // bullet 변수가 나중에 쓰이므로, 생성하고 해당 미사일을 bullet에 할당해주지뭐.
         // bullet에 크게 의미는 없고 bullet을 Attack에서 유일하게 생성하기 위해 static을 사용한것으로 보임. 주석처리해도 되는듯
         //bullet = Instantiate(instance, attackPos.transform.position + pos, attackPos.transform.rotation);
-        PhotonNetwork.Instantiate("AssetProjectile", attackPos.transform.position + pos, attackPos.transform.rotation);
+        PhotonNetwork.Instantiate("AssetProjectile", attackPos.transform.position + pos + addPosition, attackPos.transform.rotation);
         
 
     }
